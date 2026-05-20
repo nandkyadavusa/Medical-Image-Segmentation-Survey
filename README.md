@@ -6,7 +6,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/yourusername/Medical-Image-Segmentation-Survey/graphs/commit-activity)
 
 <p align="center">
-  <img src="assets/overview.png" width="90%" />
+  <img src="image.png" width="90%" />
 </p>
 
 This repository provides a **curated, structured collection** of 100+ methods in medical image segmentation, organized by architectural paradigm. It accompanies our survey paper:
