@@ -485,7 +485,8 @@ We decompose segmentation architectures into **three functional components**:
 
 ## Mixture-of-Experts and Adaptive Routing
 
-- **TA-MoSC: Rethinking U-Net — Task-Adaptive Mixture of Skip Connections**  
+- **Rethinking U-Net: Task-Adaptive Mixture of Skip Connections for Enhanced
+Medical Image Segmentation**  
   *Luo et al.* [AAAI 2025]  
   [[Paper]](https://ojs.aaai.org/index.php/AAAI/article/view/33009) [[Code]](https://github.com/AshleyLuo001/UTANet)
 
