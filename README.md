@@ -189,8 +189,8 @@ We decompose segmentation architectures into **three functional components**:
   [[Paper]](https://arxiv.org/abs/2109.07162) [[Code]](https://github.com/ZhifangDeng/MISSFormer)
 
 - **UNETR++: Efficient Paired Attention for 3D Medical Segmentation**  
-  *Shaker et al.* [IEEE TMI 2023]  
-  [[Paper]](https://arxiv.org/abs/2212.04497) [[Code]](https://github.com/Amshaker/unetr_plus_plus)
+  *Shaker et al.* [IEEE TMI 2025]  
+  [[Paper]](https://ieeexplore.ieee.org/abstract/document/10526382) [[Code]](https://github.com/Amshaker/unetr_plus_plus)
 
 ### CNN–Transformer Hybrid Models
 
