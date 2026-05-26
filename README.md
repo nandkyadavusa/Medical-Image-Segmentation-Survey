@@ -165,6 +165,9 @@ We decompose segmentation architectures into **three functional components**:
 - **3D U-Net: Learning Dense Volumetric Segmentation from Sparse Annotation**  
   *Çiçek et al.* [MICCAI 2016]  
   [[Paper]](https://arxiv.org/abs/1606.06650)
+ - **nnU-Net: a self-configuring method for deep learning-based biomedical image segmentation**  
+  *Isensee et al.* [Nature Methods]  
+  [[Paper]](https://www.nature.com/articles/s41592-020-01008-z) [[Code]](https://github.com/MIC-DKFZ/nnUNet)
 
 ---
 
