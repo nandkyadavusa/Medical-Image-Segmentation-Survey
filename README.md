@@ -487,7 +487,7 @@ We decompose segmentation architectures into **three functional components**:
 
 - **TA-MoSC: Rethinking U-Net — Task-Adaptive Mixture of Skip Connections**  
   *Luo et al.* [AAAI 2025]  
-  [[Paper]](https://ojs.aaai.org/index.php/AAAI/article/view/33009)
+  [[Paper]](https://ojs.aaai.org/index.php/AAAI/article/view/33009) [[Code]](https://github.com/AshleyLuo001/UTANet)
 
 - **Capsule-Expert Routing UNet: A Hybrid 2.5D Convolution-Attention Architecture with MoE for 3D Medical Segmentation**  
   *Yadav et al.* [2026]  
