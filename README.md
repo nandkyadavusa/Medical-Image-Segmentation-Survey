@@ -29,7 +29,7 @@ If you find this repository useful, please cite our survey:
 ```bibtex
 @article{yadav2025multiobjective,
   title={A Multi-Objective Perspective on Architectures and Design in Medical Image Segmentation},
-  author={Yadav, Nand Kumar and Bose, Moinak and Jha, Debesh and Chen, William C. W.},
+  author={Yadav, Nand Kumar and Jha, Debesh and Chen, William C. W.,and Bose, Moinak },
   journal={arXiv preprint arXiv:2025.XXXXX},
   year={2025}
 }
