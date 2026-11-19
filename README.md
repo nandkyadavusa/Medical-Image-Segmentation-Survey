@@ -20,6 +20,11 @@ We argue that segmentation architectures operate under **four competing objectiv
 
 **We welcome contributions!** Feel free to open a pull request when new relevant work is published.
 
+### Newly verified papers (2026)
+
+See the [curated 2026 paper additions](ADDITIONAL_PAPERS_2026.md) and the [machine-readable index](additional_papers_2026.csv) for 12 additional CVPR/MICCAI publications, technical mechanisms, official links, and proposed diagnostic comparisons. This reading list is separate from the manuscript's fixed 95-method inventory and does not change its literature cutoff or supplementary evidence files.
+
+
 ---
 
 ## Citation
