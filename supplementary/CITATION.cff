@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Please cite the associated manuscript and this supplementary version."
+title: "Supplementary evidence for A Taxonomy of Architectural Transitions in Medical Image Segmentation"
+type: dataset
+version: "2026-11-20"
+date-released: "2026-11-20"
+license: MIT
+authors:
+  - family-names: "Yadav"
+    given-names: "Nand Kumar"
+  - family-names: "Regmi"
+    given-names: "Smriti"
+  - family-names: "Bose"
+    given-names: "Moinak"
+  - family-names: "Alexander"
+    given-names: "N. Reed"
+  - family-names: "Jha"
+    given-names: "Debesh"
+  - family-names: "Chen"
+    given-names: "William C. W."

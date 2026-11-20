@@ -1,0 +1,154 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage{microtype}
+\usepackage[a4paper,margin=22mm,headheight=15pt]{geometry}
+\usepackage{xcolor,booktabs,array,tabularx,longtable,amsmath,fancyhdr,hyperref,float}
+\usepackage{xurl}
+\usepackage[font=small,labelfont=bf]{caption}
+\definecolor{navy}{HTML}{203954}
+\definecolor{pale}{HTML}{EAF0F5}
+\hypersetup{colorlinks=true,urlcolor=navy,linkcolor=navy,pdftitle={Supplementary Information - Medical Image Segmentation Taxonomy}}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Supplementary Information}
+\rhead{\small Evidence inventory and audit}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.17}
+\newcommand{\ssection}[1]{\vspace{5pt}\noindent{\large\bfseries\color{navy}#1}\par\vspace{3pt}}
+\begin{document}
+\begin{center}
+{\large\bfseries A Taxonomy of Architectural Transitions in Medical Image Segmentation: A Framework for Bottleneck Redistribution}\par
+\vspace{8pt}
+{\LARGE\bfseries Supplementary Information}\par
+\vspace{3pt}
+{\large Method inventory, numerical provenance, and evidence-use conventions}\par
+\vspace{8pt}
+{\small Accompanies Supplementary Data S1 (\nolinkurl{method_register.csv}) and S2 (\nolinkurl{numerical_verification.csv})}\par
+\end{center}
+\vspace{4pt}\hrule\vspace{9pt}
+
+\ssection{S1. Scope and provenance}
+This document explains the two machine-readable evidence files accompanying the structured narrative synthesis. The literature coverage boundary in the manuscript is \textbf{30 June 2026}. The initial source audit is dated \textbf{19 November 2026}, with a field-level follow-up on \textbf{20 November 2026}; those targeted checks are not an exhaustive literature-search update. A separate contextual update documents 23 CVPR/MICCAI 2026 publications without changing the frozen S1 count. No patient-level records, new training experiments, pooled effects, or independent reimplementations were generated for this supplementary package.
+
+The method inventory is \emph{purposive}: it describes the architectural mechanisms discussed in the manuscript, not the population prevalence of methods or a systematic review with a reconstructed screening history. Each named method receives one primary family assignment; variants and multiple manuscript mentions do not increase the count. Hybrid mechanisms remain documented in the individual rows.
+
+\begin{table}[H]
+\centering\small
+\caption{Supplementary Data S1 coverage, counted method families only.}
+\begin{tabularx}{0.95\linewidth}{Xr}\toprule
+\textbf{Primary mechanism} & \textbf{Count}\\\midrule
+CNN / U-shaped & 15\\
+Transformer / CNN--transformer hybrid & 31\\
+SSM / Mamba & 17\\
+SAM / medical foundation model & 29\\
+Adaptive routing / architecture search & 3\\\midrule
+\textbf{Named medical segmentation families} & \textbf{95}\\\bottomrule
+\end{tabularx}
+\end{table}
+The CSV additionally contains \textbf{40 contextual records} (surveys, datasets, theory or other sources excluded from the counted method-family total), giving \textbf{135 inventory records} in all. A source's presence is not evidence of independent verification of every reported experimental result.
+
+\ssection{S2. Data S1: method register}
+\nolinkurl{method_register.csv} links each method or contextual source to its citation key, source record, inclusion rationale, and manuscript location. The stable identifier \texttt{inventory\_id} allows entries to be cited without relying on row order.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Key fields in the method register (16 columns in the CSV).}
+\begin{tabularx}{\linewidth}{>{\ttfamily\raggedright\arraybackslash}p{47mm}X}\toprule
+\normalfont\textbf{Column(s)} & \textbf{Interpretation}\\\midrule
+inventory\_id, counted\_method & Stable record key and 1/0 inclusion in the 95-family count.\\
+family, method & Primary mechanism class and named method/source.\\
+variants\_grouped & Configurations and versions treated as one parent method.\\
+citekeys, manuscript\_locations & Links to the article's references, discussion, and tables.\\
+inclusion\_status, inclusion\_rationale & Why the entry is counted or contextual.\\
+source\_title, source\_year, source\_doi, source\_url & Bibliographic identity and source pointers; a link alone is not a verification claim.\\
+source\_metadata\_status & Specific scope of bibliographic checking.\\
+numerical\_verification, notes & Numerical traceability, qualifications, and any unresolved issues.\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\ssection{S3. Data S2: numerical verification records}
+\nolinkurl{numerical_verification.csv} contains one record per audited numerical row in the manuscript's representative method tables. There are \textbf{68 records}, linked to \textbf{five main-paper tables}. The audit records the configuration actually evaluated rather than assigning later reimplementation numbers to the architectural origin without qualification.
+
+\begin{table}[H]
+\centering\small
+\caption{Coverage of Supplementary Data S2.}
+\begin{tabularx}{0.95\linewidth}{Xr}\toprule
+\textbf{Main-paper table} & \textbf{Audited rows}\\\midrule
+Table 6: CNN/U-Net examples & 11\\
+Table 8: transformer examples, part 1 & 14\\
+Table 9: transformer examples, part 2 & 15\\
+Table 10: SSM/Mamba examples & 13\\
+Table 11: promptable/foundation models & 15\\\midrule
+\textbf{Total source-specific records} & \textbf{68}\\\bottomrule
+\end{tabularx}
+\end{table}
+
+The record identifiers follow the convention \texttt{S2-TXX-RYY}, corresponding to the table and row. The audit includes \texttt{method\_and\_variant}, \texttt{dataset\_or\_target}, displayed metrics, displayed parameter and GFLOP counts, the reporting source's role, citation keys, a source URL and version, a table/page locator, the fields actually checked, the relevant protocol and aggregation conditions, unresolved details, and an audit/revision history. Full column definitions are preserved in the CSV header (29 columns).
+
+\ssection{S4. Evidence interpretation}
+The main paper defines a comparison record for result $r_i$ as
+\[
+q_i=(\mathcal D_i,\mathcal T_i,\mathcal S_i,\mathcal G_i,\mathcal M_i,\mathcal P_i,\mathcal C_i),
+\]
+where the terms respectively specify cohort, task/label ontology, patient split, input geometry, metric semantics, prompting/inference regime, and computational-accounting scope. Comparisons require matching the fields relevant to the intended inference.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{The manuscript's comparison-specific admissibility tiers.}
+\begin{tabularx}{\linewidth}{>{\bfseries}p{16mm}X}\toprule
+\textbf{Tier} & \textbf{Permitted interpretation}\\\midrule
+A (strict) & Verified, compatible protocol-local contrast for the declared endpoint; architecture-level causal claims additionally require controlled initialization and training.\\
+B (partial) & Source-specific descriptive context where relevant matching fields are incomplete or differ; not a normalized cross-paper ranking.\\
+C (context) & Architectural/operational context only when dimensionality, labels, geometry, or inference conditions are incompatible.\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Provenance is distinct from comparability.} A primary study and a later independent reimplementation are separately attributable experimental records. A subsequent table transcribing either is a secondary report. The notation \texttt{NR} means that no value for the displayed configuration was reported in the inspected source version; this does not assert absence from every later report. \texttt{NV} means configuration-specific verification remains unresolved because source access, model attribution, or units are insufficient. Neither label denotes zero or a verified measurement. Similarly, a verified printed value does not imply independent retraining or that all implementation details were reproduced.
+
+
+\ssection{S5. Follow-up of previously withheld numerical cells}
+The supplied manuscript contained \textbf{77 occurrences of the token NV}: \textbf{72 numerical table entries} and five explanatory mentions. The 20 November follow-up accounts for all 72 entries in \nolinkurl{nv_cell_audit_2026-11-20.csv}; the stable S2 row identifiers are preserved.
+
+\begin{table}[H]
+\centering\small
+\caption{Disposition of the 72 previously withheld numerical entries.}
+\begin{tabularx}{0.95\linewidth}{Xr}\toprule
+\textbf{Disposition} & \textbf{Entries}\\\midrule
+Source-reported numerical values recovered & 26\\
+Not reported for the displayed configuration in the inspected source (NR) & 33\\
+Still unverified owing to source access, variant attribution, or units (NV) & 12\\
+Unsupported UCTransNet ISIC outcome removed & 1\\\midrule
+\textbf{Total accounted for} & \textbf{72}\\\bottomrule
+\end{tabularx}
+\end{table}
+The 33 NR classifications are \emph{reporting-status findings, not recovered measurements}. Later-source values carry the manuscript's provenance marker. No model was retrained or independently profiled. H2Former values were inspected in a transcription of the original article hosted on a mirror; S2 records that access route. Printed computational costs retain unresolved profiling conventions where the source does not specify them.
+
+The 23-publication update is recorded in \texttt{contextual\_update\_2026.csv} and its companion bibliography. Three of these papers were already cited in the supplied manuscript; twenty additional citations are integrated in a separately labeled contextual subsection. These records do not change the retrospective 95-family total, the 40 contextual/excluded S1 records, or the 68 S2 record identifiers.
+
+\ssection{S6. Illustrative unresolved questions}
+The following examples demonstrate why the CSV retains unresolved fields. They are reported as audit qualifications, not as new experimental findings or corrections to the authors' original measurements.
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Examples requiring explicit source qualification or follow-up.}
+\begin{tabularx}{\linewidth}{>{\ttfamily\raggedright\arraybackslash}p{25mm}>{\bfseries}p{24mm}X}\toprule
+\normalfont\textbf{Record} & \textbf{Method} & \textbf{Qualification in S2}\\\midrule
+S2-T09-R11 & MIST & Reported aggregate in one source table does not equal a simple mean of its eight printed organ values; the audit retains the source number and flags the discrepancy.\\
+S2-T09-R07 & FCT-384 & Parameter/GFLOP values for different variants must not be attached to the retained FCT-384 accuracy without matched source context.\\
+S2-T10-R10 & SegMamba-V2 & Numerical outcomes remain NV in the supplied audit, which established metadata/abstract rather than a configuration-level full-text check.\\
+S2-T06-R11 & CBAM-U-Net & Full original experimental tables remain unavailable; the abstract reports accuracy, which must not be substituted for Dice.\\
+S2-T09-R06 / R09 & FAT-Net / BATFormer & The inspected BATFormer source labels its F quantities as GFLOP/s; their interpretation as per-input operation counts remains unresolved.\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\ssection{S7. Reuse and limitations}
+The CSV files document existing literature records and targeted bibliographic/numerical source checks. They do \emph{not} constitute a PRISMA screening record, a complete risk-of-bias assessment, independent model training, or evidence of a statistically pooled treatment effect. Before drawing a numerical comparison, users should inspect the corresponding \nolinkurl{source_locator}, \nolinkurl{verified_fields}, \nolinkurl{protocol_and_aggregation_context}, and \nolinkurl{unresolved_fields}. Unresolved values must not be imputed from familiar benchmark conventions. The versioned CSVs should be deposited alongside this explanatory document and the cell-level change record. T-Mamba's comparator has been checked in source Table 2: PMFSNet3D 91.30 DSC / HD 5.57 mm and T-Mamba 93.60 / 1.18 mm; the differences are not dispersion estimates. Other protocol and aggregation limits remain in S2.
+
+\vspace{6pt}\hrule\vspace{5pt}
+{\small\textbf{Companion files:} \nolinkurl{method_register.csv} (S1), \nolinkurl{numerical_verification.csv} (S2). The journal manuscript remains the authoritative source for architectural interpretation and numbered tables; this document is a guide to the source-specific data records.}
+\end{document}

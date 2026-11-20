@@ -1,0 +1,368 @@
+--- original_uploaded.tex
++++ Medical_Segmentation_Revised.tex
+@@ -321,7 +321,7 @@
+ Local spatial precision (LP) & Preservation and reconstruction of spatially localized, boundary-relevant, small-structure, and high-frequency information. & HD95/NSD or other surface measures; thin-structure or small-organ performance; topology/boundary error; controlled high-frequency or resolution perturbations. & Overall DSC alone; visual sharpness alone; a particular convolutional operator. \\
+ Global contextual reasoning (GC) & Use of long-range, inter-slice, relational, or anatomical-layout information that cannot be resolved from a local neighborhood alone. & Distant/symmetric-structure confusion; long-span relational probes; inter-slice consistency; controlled context ablations; performance stratified by required interaction span. & A large receptive field alone; DSC alone; use of attention or an SSM block. \\
+ Computational efficiency (CE) & Realized resource use for a specified implementation and input geometry. & Latency, peak memory, energy, throughput, FLOPs, and parameter count measured under a fixed model scope, precision, hardware/counter, and preprocessing policy. & Asymptotic complexity alone; parameter count alone; FLOPs measured under unmatched inputs. \\
+-Cross-domain generalization (CG) & Preservation of task performance under prospectively held-out domains that share the clinical task, label ontology, and metric-aggregation rule. & Held-out-site/modality performance, degradation relative to in-domain performance, calibration under shift, and pre-specified external-domain tests. & Number of datasets evaluated; transfer across incompatible label spaces; zero-shot breadth without a matched task. \\
++Cross-domain generalization (CG) & Preservation of task performance under prospectively held-out domains that share the clinical task, label ontology, and metric-aggregation rule. & Held-out-site/modality performance, degradation relative to in-domain performance, calibration under shift, and prespecified external-domain tests. & Number of datasets evaluated; transfer across incompatible label spaces; zero-shot breadth without a matched task. \\
+ \bottomrule
+ \end{tabularx}
+ \end{table*}
+@@ -338,7 +338,7 @@
+ \midrule
+ Material represented & Primary medical segmentation papers and author preprints; foundational mechanism papers and prior reviews for context; released implementations where used to clarify a reported metric or mechanism. \\
+ Mechanism coverage & CNN/U-Net, transformer and CNN--transformer hybrids, SSM/Mamba, SAM/medical foundation models, and adaptive routing/architecture search. \\
+-Coverage boundary & Work publicly available by 30 June 2026. Targeted checks for this revision are dated in the supplementary records; they do not constitute an exhaustive database update. \\
++Coverage boundary & Retrospective synthesis: work publicly available by 30 June 2026. A targeted contextual update checked on 20 November 2026 is identified separately in Section~\ref{subsec:context_update_2026}; it does not alter the retrospective corpus. \\
+ Counted material & Named medical segmentation method families discussed in the manuscript. Configurations are grouped under the parent method; a method discussed in several sections is counted once. \\
+ Contextual material & General-purpose mechanisms, datasets, metric implementations, and prior reviews remain contextual sources and are excluded from the medical-method total. \\
+ Inventory fields & S1 records method identity, family, grouped variants, citation, manuscript location, and inclusion rationale. S2 records numerical sources, inspected versions, checked fields, and unresolved details. \\
+@@ -352,7 +352,7 @@
+ 
+ The Structured Narrative Synthesis presented here covers architectural mechanisms and the circumstances under which they are useful. The coverage is purposive, i.e. it aims to represent the different information flow mechanisms rather than providing an estimate of a pooled effect or giving a complete overview of the field. Table~\ref{tab:protocol} gives an overview of the sources and method families covered in the manuscript, as well as the coverage boundary and evidence-recording policy. The accompanying inventories contain the results of the synthesis; they do not reproduce the database queries, the retrieval histories or the screening decisions.
+ 
+-Three CVPR 2026 studies are cited below as additional architectural context. These contextual citations were not included in the frozen 95-family method inventory or the configuration-level numerical audit; they do not change the retrospective counts or establish a new screening process. Studies appearing after the 30 June 2026 coverage boundary are not treated as evidence within this synthesis.
++Additional CVPR 2026 and MICCAI 2026 studies are discussed as a separately identified contextual update in Section~\ref{subsec:context_update_2026}. They are excluded from the frozen 95-family method inventory and its configuration-level numerical audit. This targeted update does not extend the retrospective coverage boundary or establish a new systematic screening process.
+ 
+ \noindent\textbf{Method inventory.}
+ Supplementary Data S1 contains the medical segmentation method families counted in the retrospective synthesis, with a stable record identifier, primary family assignment, citation key, manuscript location, and inclusion rationale. Table~\ref{tab:corpus_audit} is calculated from this inventory. Configurations of a method are recorded as variants and do not silently increase the family count; a method discussed in several sections is counted once. The inventory documents the content of this retrospective synthesis and should not be interpreted as a reconstructed database-search or screening log.
+@@ -628,18 +628,18 @@
+ & Dense feature reuse
+ & In-vivo multiphoton microscopy
+ & 90.60
+-& NV
+-& NV
+-& NV
++& NR
++& NR
++& NR
+ & Original cellular segmentation study; the number does not describe abdominal CT. \\
+ 
+ H-DenseUNet \citep{li2018h}
+ & Hybrid 2D--3D convolution
+ & LiTS 2017
+ & Liver 96.1; lesion 72.2
+-& NV
+-& NV
+-& NV
++& NR
++& NR
++& NR
+ & Primary Table II, Dice per case. Global Dice is a different aggregation and is not substituted. \\
+ 
+ Residual U-Net (medical reimplementation) \citep{azad2024unet_verified}
+@@ -656,26 +656,26 @@
+ & Synapse CT
+ & 77.12
+ & HD 32.12
+-& NV
+-& NV
++& NR
++& NR
+ & Later comparison in \citet{zhang2024multi}\textsuperscript{\dag}; the source calls the boundary metric HD. \\
+ 
+ DoubleU-Net \citep{jha2020doubleu}
+ & Cascaded refinement
+ & CVC-ClinicDB
+ & 92.39
+-& NV
+-& NV
+-& NV
++& NR
++& NR
++& NR
+ & Primary Table III: Dice 0.9239, expressed here as a percentage. Dataset-specific result; no pooled polyp score is implied. \\
+ 
+ KiU-Net \citep{valanarasu2021kiu,review95_valanarasu2020kiunet}
+ & Undercomplete and overcomplete paths
+ & Brain ultrasound
+ & 89.43
+-& NV
++& NR
+ & 0.29
+-& NV
++& NR
+ & Original conference report, Table 1; mean Dice is shown. The reported dispersion is not transferred without its aggregation context. \\
+ 
+ 3D U-Net \citep{cciccek20163d}
+@@ -683,9 +683,9 @@
+ & BraTS 2020 validation
+ & ET 68.76; WT 84.11; TC 79.06
+ & HD95: ET 50.983; WT 13.366; TC 13.607
+-& NV
+-& NV
+-& Plain 3D U-Net baseline in TransBTS\textsuperscript{\dag} \citep{reviewfix_wang2021transbts}, Table 2. Residual 3D U-Net is a separate row in that source. \\
++& 16.21
++& 1670
++& Plain 3D U-Net baseline in TransBTS\textsuperscript{\dag} \citep{reviewfix_wang2021transbts}, Table 2 and Section 3.2; cost accounting is source-specific. Residual 3D U-Net is a separate row in that source. \\
+ 
+ nnU-Net \citep{isensee2021nnu}
+ & Self-configuring pipeline
+@@ -707,7 +707,7 @@
+ 
+ \bottomrule
+ \end{tabularx}
+-\caption{Representative convolutional segmentation designs with numerical sources separated from architectural origins. Scores retain the source metric and reported precision. The 3D U-Net row uses the plain baseline, not the residual baseline. Different datasets, label spaces, aggregations, and implementations prevent a common ranking. NV and the provenance marker follow the convention defined in Table~\ref{tab:transformer_medseg}.}
++\caption{Representative convolutional segmentation designs with numerical sources separated from architectural origins. Scores retain the source metric and reported precision. The 3D U-Net row uses the plain baseline, not the residual baseline. Different datasets, label spaces, aggregations, and implementations prevent a common ranking. NR, NV, and the provenance marker follow the convention defined in Table~\ref{tab:transformer_medseg}.}
+ \label{tab:unet_compare}
+ \end{table*}
+ 
+@@ -798,22 +798,22 @@
+ 
+ Lightweight TransBTS \citep{reviewfix_wang2021transbts} & BraTS 2019 validation & Dice WT 90.36\%, TC 81.76\%, ET 78.94\%; HD95 WT 6.004, TC 6.173, ET 4.552 & 15.14 & 208 & Reduced TransBTS variant with one transformer layer and a halved feed-forward hidden dimension; costs are reported in the original paper, with counting geometry unspecified in the cited passage. \\
+ 
+-TransFuse-S \citep{reviewfix_zhang2021transfuse} & ISIC2017 / Kvasir / CVC-ClinicDB & ISIC Dice 87.2\%, Kvasir Dice 91.8\%, ClinicDB Dice 91.8\% & 26.3 & NV & ResNet-34 and DeiT-Small branches fused through BiFusion modules; values refer to the small variant. \\
+-
+-MedT \citep{valanarasu2021medt_verified} & Brain US / GlaS / MoNuSeg & F1 88.84 (Brain US), 81.02 (GlaS), 79.55 (MoNuSeg) & 1.4 (Brain US) & NV & Gated axial attention and local--global training. The parameter count is the Brain-US configuration in supplementary Table 2; it is not transferred to other datasets. \\
+-Swin-Unet \citep{cao2022swinunet} & Synapse multi-organ CT & DSC 79.13\%, HD 21.55 & NV & NV & Pure Swin Transformer U-shaped architecture; patch merging encoder and patch expanding decoder. \\
++TransFuse-S \citep{reviewfix_zhang2021transfuse} & ISIC2017 / Kvasir / CVC-ClinicDB & ISIC Dice 87.2\%, Kvasir Dice 91.8\%, ClinicDB Dice 91.8\% & 26.3 & NR & ResNet-34 and DeiT-Small branches fused through BiFusion modules; values refer to the small variant; its original report does not give FLOPs. \\
++
++MedT \citep{valanarasu2021medt_verified} & Brain US / GlaS / MoNuSeg & F1 88.84 (Brain US), 81.02 (GlaS), 79.55 (MoNuSeg) & 1.4 (Brain US) & NR & Gated axial attention and local--global training. The parameter count is the Brain-US configuration in supplementary Table 2; it is not transferred to other datasets. \\
++Swin-Unet \citep{cao2022swinunet} & Synapse multi-organ CT & DSC 79.13\%, HD 21.55 & 27.17$^{\dagger}$ & 6.16$^{\dagger}$ & Pure Swin Transformer U-shaped architecture; patch merging encoder and patch expanding decoder. Costs: \citet{azad2023dlka_nv}, Table 1. \\
+ 
+ MISSFormer \citep{reviewfix_huang2021missformer} & Synapse, ACDC & Synapse DSC 81.96\%, HD 18.20 & 42.46$^{\dagger}$ & 7.25$^{\dagger}$ & Hierarchical encoder-decoder transformer with enhanced skip connections and multi-scale feature aggregation. Cost source: \citep{azad2024unet_verified}. \\
+ 
+ LeViT-UNet-384 \citep{xu2023levitunet} & Synapse & DSC 78.53\%, HD 16.84 & 52.17 & 25.55 & LeViT encoder with U-Net reconstruction; primary Tables 1--2 of the author preprint report these values and call the boundary metric HD. \\
+ 
+-UCTransNet \citep{wang2022uctransnet} & Synapse, GlaS, MoNuSeg, ISIC & Synapse DSC 78.23\%, HD 26.75; ISIC: NV & Synapse 66.43$^{\dagger}$ & Synapse 32.99$^{\dagger}$ & Channel-transformer skip fusion. Accuracy: original Table 2; costs: later evaluation by \citet{azad2024unet_verified}. \\
+-UTNet \citep{gao2021utnet} & Cardiac MRI; vendor A to A & Average Dice 88.3\% & 9.53 & NV & Efficient-attention U-Net; original Table 1 reports this same-vendor cardiac-MRI configuration. \\
+-HiFormer-L \citep{heidari2023hiformer} & Synapse & DSC 80.69\%, HD95 19.14 & 29.52 & NV & CNN and Swin features fused across scales. Large variant; source Tables 2/5. Section 4.3 defines its HD label as 95th-percentile Hausdorff distance. \\
++UCTransNet \citep{wang2022uctransnet} & Synapse, GlaS, MoNuSeg & Synapse DSC 78.23\%, HD 26.75 & Synapse 66.43$^{\dagger}$ & Synapse 32.99$^{\dagger}$ & Channel-transformer skip fusion. Accuracy: original Table 2; costs: later evaluation by \citet{azad2024unet_verified}. \\
++UTNet \citep{gao2021utnet} & Cardiac MRI; vendor A to A & Average Dice 88.3\% & 9.53 & NR & Efficient-attention U-Net; original Table 1 reports this same-vendor cardiac-MRI configuration. \\
++HiFormer-L \citep{heidari2023hiformer} & Synapse & DSC 80.69\%, HD95 19.14 & 29.52 & 11.88$^{\dagger}$ & CNN and Swin features fused across scales. Large variant; source Tables 2/5. Section 4.3 defines its HD label as 95th-percentile Hausdorff distance. FLOPs at $224\times224$: \citet{tang2025simmpnet_nv}, Table 2. \\
+ \bottomrule
+ \end{tabularx}
+ \begin{minipage}{\linewidth}\footnotesize
+-\textbf{Numerical provenance.} $^{\dagger}$ identifies a value from an explicitly cited later evaluation or reimplementation, rather than the method's original experiment. A marker on a method name applies to that row's numerical entries; a marker on a cell applies only to that cell. Unmarked retained numbers come from the method authors' cited primary report or version. NV means that a configuration-specific value has not been verified and is therefore withheld; it does not assert that the original paper failed to report it. Numbers are source-reported central estimates unless an uncertainty term and its definition are explicitly stated.
++\textbf{Numerical provenance.} $^{\dagger}$ identifies a value from an explicitly cited later evaluation or reimplementation, rather than the method's original experiment. A marker on a method name applies to that row's numerical entries; a marker on a cell applies only to that cell. Unmarked retained numbers come from the method authors' cited primary report or version. NR means that no value for the displayed configuration was reported in the inspected source version; it does not assert absence from every later report. NV means that configuration-specific verification remains unresolved because source access, model attribution, or units are insufficient. Neither label denotes zero. Numbers are source-reported central estimates unless an uncertainty term and its definition are explicitly stated.
+ \textbf{Protocols and units.} Params denotes the source-reported parameter count in millions; total versus trainable parameters must be checked before comparison. GFLOPs retains each source's operation-count convention. A common input shape, batch size, or multiply--add convention is not assumed. Lumetti et al.'s costs are Synapse-specific and its Tables 2--4 describe fold-based summaries. HD and HD95 labels are preserved separately; a shared unit or metric implementation is not inferred from similar numbers. The original TransUNet code calls \texttt{hd95} without voxel spacing \citep{transunet_code_verified}, so its paper's HD label does not by itself resolve physical-distance comparability. DAE-Former follows Table 1 of the cited preprint; other tables in that version contain different values.
+ \end{minipage}
+ \caption{Representative transformer methods, part 1: source-specific evaluations and configurations. Further methods appear in Table~\ref{tab:transformer_medseg_cont}. The values are descriptive operating points and do not form a shared leaderboard.}
+@@ -828,29 +828,29 @@
+ \toprule
+ \textbf{Method / variant} & \textbf{Dataset / task} & \textbf{Reported outcome} & \textbf{Params (M)} & \textbf{FLOPs (G)} & \textbf{Mechanism and source context} \\
+ \midrule
+-DS-TransUNet \citep{lin2022dstransunet} & Medical image segmentation & NV & NV & NV & Dual-branch Swin Transformer encoder with multi-scale feature fusion; configuration-specific numerical values were not verified. \\
+-
+-TransDeepLab \citep{reviewfix_azad2022transdeeplab} & Synapse & DSC 80.16\%, HD 21.25 & 21.14 & NV & Transformer-based DeepLab-style segmentation; values follow the original paper's Synapse comparison and parameter report. \\
+-
+-DAE-Former \citep{reviewfix_azad2022daeformer} & Synapse (primary Table 1) & DSC 82.63\%, HD 16.39 & 48.01 & NV & Efficient spatial/channel attention and cross-attention skip fusion. Accuracy and parameter values follow Table 1; other tables in the cited preprint differ. \\
++DS-TransUNet-L \citep{lin2022dstransunet} & Kvasir & mDice 91.3\% & NR & NR & Dual-branch Swin Transformer encoder with multi-scale feature fusion. Original Table II; 880/120 training/test split, $384\times384$ inputs. \\
++
++TransDeepLab \citep{reviewfix_azad2022transdeeplab} & Synapse & DSC 80.16\%, HD 21.25 & 21.14 & 16.31$^{\dagger}$ & Transformer-based DeepLab-style segmentation; values follow the original paper's Synapse comparison and parameter report. FLOPs: \citet{azad2023dlka_nv}, Table 1. \\
++
++DAE-Former \citep{reviewfix_azad2022daeformer} & Synapse & DSC 82.63\%, HD 16.39 & 48.07$^{\dagger}$ & 27.89$^{\dagger}$ & Efficient spatial/channel attention and cross-attention skip fusion. Accuracy follows original Table 1; paired costs follow \citet{azad2023dlka_nv}, Table 1. \\
+ 
+ Cascaded MERIT \citep{reviewfix_rahman2024merit} & Synapse, ACDC & Synapse DSC 84.90\%, HD95 13.22; ACDC DSC 91.85\% & 147.86 & 33.31 & Two hierarchical MaxViT backbones with CASCADE decoding and MUTATION training; reported cost uses $256\times256$ and $224\times224$ inputs. \\
+ 
+-PVT-CASCADE \citep{reviewfix_rahman2023cascade} & Synapse & DSC 81.06\%, HD95 20.23 & NV & NV & Pyramid Vision Transformer encoder with cascaded attention decoding; reported Synapse metrics use $224\times224$ inputs and are averaged over five runs. \\
+-
+-FAT-Net \citep{wu2022fatnet} & Skin lesion / polyp datasets & NV & NV & NV & Feature adaptive transformer with CNN--transformer fusion for boundary-sensitive segmentation. \\
++PVT-CASCADE \citep{reviewfix_rahman2023cascade} & Synapse & DSC 81.06\%, HD95 20.23 & 35.28$^{\dagger}$ & 6.40$^{\dagger}$ & Pyramid Vision Transformer encoder with cascaded attention decoding; reported Synapse metrics use $224\times224$ inputs and are averaged over five runs. Costs: \citet{azad2023dlka_nv}, Table 1. \\
++
++FAT-Net \citep{wu2022fatnet}$^{\dagger}$ & ISIC2018 & Dice 89.08\% & 30 & NV & Feature adaptive transformer with CNN--transformer fusion. Later reimplementation: \citet{lin2023batformer}, Table V; 2076/520 training/test split. Its reported F=23 is labelled GFLOP/s. \\
+ 
+ FCT \citep{tragakis2023fct} & ACDC cardiac MRI & ACDC Dice 93.02\% (FCT-384) & NV & NV & Fully convolutional transformer; combines convolutional inductive bias with transformer-style global modeling. \\
+ 
+-H2Former \citep{he2023h2former} & Medical segmentation & NV & NV & NV & Hierarchical hybrid CNN--transformer fusion; configuration-specific numerical attribution is unresolved. \\
+-
+-BATFormer \citep{lin2023batformer} & Medical image segmentation & NV & NV & NV & Boundary-aware transformer; retained for mechanism context without unverified configuration-specific scores. \\
+-
+-SwinPA-Net \citep{du2024swinpanet} & Polyp datasets & NV & NV & NV & Swin Transformer with dense multiplicative connections and local pyramid attention for multiscale feature aggregation. \\
+-MIST \citep{rahman2024mist} & ACDC/ Synapse & ACDC Dice 92.56\%, Synapse Dice 86.92\%, HD95 11.07 & 95.74 & NV & MaxViT and CAM decoder. Outcomes follow original Tables 1--2; parameters refer to the Synapse ablation. S2 records the source's unresolved Synapse aggregation. \\
+-HCTNet \citep{he2023hctnet} & Breast ultrasound (three datasets) & NV & NV & NV & Hybrid CNN-transformer design with cross-attention for complementary local-global feature interaction. \\
+-
+-MT-UNet \citep{reviewfix_wang2021mtunet} & Synapse, ACDC & Synapse DSC 78.59\%, HD95 26.59, ACDC DSC 90.43\% & NV & NV & Mixed Transformer U-Net combines local--global Gaussian-weighted self-attention and external attention within a U-shaped architecture. \\
++H2Former \citep{he2023h2former} & ISIC2016 & Dice 92.41\% & 33.71 & 33.56 & Hierarchical hybrid CNN--transformer fusion. Original Table I and Section IV-E; $512\times512$ inputs, five-experiment mean Dice. \\
++
++2D BATFormer \citep{lin2023batformer} & ACDC cardiac MRI & Dice 92.84\% & 1.2 & NV & Boundary-aware transformer; original Table IV, 70/10/20 patient split. Its reported F=4.1 is labelled as an operation rate. \\
++
++SwinPA-Net \citep{du2024swinpanet}$^{\dagger}$ & CVC-ClinicDB / Kvasir-SEG & ClinicDB Dice 95.68\%; Kvasir Dice 95.04\% & 102.87 & NR & Dense multiplicative connections and local pyramid attention. Later $256\times256$, 8:1:1 evaluations: \citet{chen2026pcatransunet_nv}, Tables 1--2. \\
++MIST \citep{rahman2024mist} & ACDC/ Synapse & ACDC Dice 92.56\%, Synapse Dice 86.92\%, HD95 11.07 & 95.74 & NR & MaxViT and CAM decoder. Outcomes follow original Tables 1--2; parameters refer to the Synapse ablation. S2 records the source's unresolved Synapse aggregation. \\
++HCTNet \citep{he2023hctnet}$^{\dagger}$ & BUSI breast ultrasound & Dice 81.24\% & 22.20 & 38.91 & Hybrid CNN--transformer with cross-attention. Later $224\times224$ evaluation: \citet{yang2026mambacnn_nv}, Tables 1/3; exact BUSI-only split is unspecified. \\
++
++MT-UNet \citep{reviewfix_wang2021mtunet} & Synapse, ACDC & Synapse DSC 78.59\%, HD95 26.59, ACDC DSC 90.43\% & Synapse 79.07$^{\dagger}$ & Synapse 44.75$^{\dagger}$ & Mixed Transformer U-Net combines local--global Gaussian-weighted self-attention and external attention within a U-shaped architecture. Synapse costs at $224\times224$: \citet{tang2025simmpnet_nv}, Table 2 (MixTrans). \\
+ 
+ UNETR++ \citep{shaker2024unetrpp} & Synapse / BTCV / ACDC & Synapse DSC 87.22\%, HD95 7.53; BTCV DSC 83.28\%; ACDC DSC 92.83\% & 42.96 & 47.98 & Efficient paired spatial/channel attention. Costs and Synapse metrics follow primary Table 1; BTCV uses 13 organs. Costs are not transferred from the BraTS configuration. \\
+ 
+@@ -858,7 +858,7 @@
+ \bottomrule
+ \end{tabularx}
+ 
+-\caption{Representative transformer methods, part 2. Protocol and provenance conventions follow Table~\ref{tab:transformer_medseg}. NV retains an unresolved value; an architecture is included for its mechanism even when a numerical record is not verified.}
++\caption{Representative transformer methods, part 2. Protocol and provenance conventions follow Table~\ref{tab:transformer_medseg}. NR identifies an inspected-source nonreport and NV an unresolved value; an architecture is included for its mechanism even when a numerical record is not verified.}
+ \label{tab:transformer_medseg_cont}
+ \end{table*}
+ 
+@@ -868,7 +868,7 @@
+ Transformer-based models have also been adapted to specific medical tasks. For example, BATFormer~\citep{lin2023batformer} introduces boundary-aware attention to improve edge delineation, addressing a common weakness of transformer models in low-contrast regions. SwinPA-Net~\citep{du2024swinpanet} combines a Swin Transformer backbone with dense multiplicative connections and local pyramid attention to aggregate multiscale medical-image features. HCTNet~\citep{he2023hctnet} combines CNN and transformer features for breast-ultrasound lesion segmentation, where speckle and weak lesion margins make local evidence unreliable.
+ The common point is practical: transformer blocks alone do not solve low contrast, noisy boundaries, or anatomical variability. Task-specific designs usually add an explicit mechanism for one of these failure modes.
+ 
+-Table~\ref{tab:transformer_medseg} summarizes representative transformer-based medical image segmentation methods. Values without configuration-specific provenance are marked NV and excluded from numerical comparison. Image resolution, data split, augmentation, model variant, and post-processing must be checked before any numerical comparison.
++Table~\ref{tab:transformer_medseg} summarizes representative transformer-based medical image segmentation methods. Unavailable or unverified configuration-specific values are marked NR or NV and excluded from numerical comparison. Image resolution, data split, augmentation, model variant, and post-processing must be checked before any numerical comparison.
+ \paragraph{Mechanistic takeaway}
+ 
+ 
+@@ -1005,8 +1005,8 @@
+ & BraTS 2023
+ & 89.97
+ & HD95 6.53
+-& NV
+-& NV
++& NR
++& NR
+ & Preprint v2, Table 1. MICCSS is a combination of channel/spatial Siamese processing and convolution. Table 2 15.55M/141.14G costs are for AMOS, not transferred here. \\
+ 
+ VM-UNet \citep{ruan2024vm}
+@@ -1014,8 +1014,8 @@
+ & Synapse (8 organs)
+ & 81.08
+ & HD95 19.21
+-& NV
+-& NV
++& NR
++& NR
+ & Primary Table II. Four-direction spatial scanning with an asymmetric U-shaped model. Includes embedding/reconstruction cost. \\
+ 
+ Mamba-UNet \citep{wang2024mamba}
+@@ -1023,15 +1023,15 @@
+ & Synapse CT
+ & 64.29
+ & HD 24.4725
+-& NV
+-& NV
++& NR
++& NR
+ & Primary Table 2 shows Dice 0.6429, HD 24.4725. This is own training protocol. Not comparable to VM-UNet protocol. \\
+ 
+ UltraLight VM-UNet \citep{wu2025ultralight}
+ & Parallel VSS
+ & ISIC2017 / ISIC2018 / PH2
+ & 90.91 / 89.40 / 92.65
+-& NV
++& NR
+ & 0.049
+ & 0.060
+ & Published primary Table 1. Three Dice values are corresponding to the datasets. Model size and GFLOPs as reported there. No unmatched backbone ratio inferred. \\
+@@ -1049,18 +1049,18 @@
+ & 2D VSS hierarchy
+ & AbdomenMRI / Endoscopy
+ & 77.05 / 67.83
+-& NV
++& NSD 0.8376 / 0.6933
+ & 28
+ & 18.9 / 45.3
+-& Preprint v2, Tables 1-2. Mamba decoder variant. ImageNet-initialized VMamba encoder. Different setup for 60M CNN decoder base. Both costs are 2D and dataset-specific. \\
++& Preprint v2, Tables 1-2. Mamba decoder variant; NSD is a surface-overlap score on a 0--1 scale. ImageNet-initialized VMamba encoder. Different setup for 60M CNN decoder base. Both costs are 2D and dataset-specific. \\
+ 
+ SegMamba \citep{xing2024segmamba}$^{\dagger}$
+ & 3D tri-oriented SSM
+ & BraTS 2023
+ & 91.32
+ & HD95 3.56
+-& NV
+-& NV
++& NR
++& NR
+ & Tri-oriented spatial processing. Convolutional reconstruction. Numerical record: SegMamba baseline in HybridMamba \citep{wu2025hybridmamba}, Table 1. $128^3$ crops. Split in the same paper. \\
+ 
+ SegMamba-V2 \citep{xing2025segmamba}
+@@ -1079,29 +1079,29 @@
+ & HD 1.18
+ & 1.04
+ & 25.43
+-& Expanded preprint v2; main 3D comparison. A learned gate selects frequency and spatial features. The source-reported +2.30 Dice and $-4.39$ HD are comparator-relative changes, not standard deviations; the comparator must be checked in the cited version. \\
++& Expanded preprint v2; main 3D comparison. A learned gate selects frequency and spatial features. Table 2 reports PMFSNet3D at 91.30 DSC / HD 5.57 mm and T-Mamba at 93.60 / 1.18 mm; +2.30 Dice points and $-4.39$ mm HD are comparator-relative changes, not standard deviations. Most baseline results are inherited from the cited PMFSNet3D study. \\
+ 
+ LKM-UNet \citep{wang2024lkm}
+ & Pixel + patch SSM
+ & 3D Abdomen CT / 2D Abdomen MR
+ & 86.82 / 77.35
+-& NV
+-& NV
+-& NV
+-& Primary MICCAI Table 1. Pixel and patch Mamba pathways process different spatial scales. Two scores are for different dimensionality and datasets. \\
++& NSD 90.02\% / 83.80\%
++& NR
++& NR
++& Primary MICCAI Table 1; NSD is expressed as a percentage. Pixel and patch Mamba pathways process different spatial scales. Two scores are for different dimensionality and datasets. \\
+ 
+ HybridMamba \citep{wu2025hybridmamba}
+ & Spatial + frequency SSM
+ & BraTS 2023 / LC
+ & 91.92 / 75.34
+ & HD95 3.48 / 44.52
+-& NV
+-& NV
++& NR
++& NR
+ & Primary MICCAI Table 1. Pairs of values are corresponding to the datasets. Slice-oriented and local-adaptive Mamba. Frequency gating. $128^3$ crops. 70/10/20 split. \\
+ 
+ \bottomrule
+ \end{tabularx}
+-\caption{Representative Mamba-based segmentation architectures. Model variants, dataset-specific measurements, and numerical sources are listed per row. HD is not quietly converted to HD95. No assumption of common distance units. No pooling/ordering results in a leaderboard. NV and provenance marker as in Table~\ref{tab:transformer_medseg}.}
++\caption{Representative Mamba-based segmentation architectures. Model variants, dataset-specific measurements, and numerical sources are listed per row. HD is not quietly converted to HD95. No assumption of common distance units. No pooling/ordering results in a leaderboard. NR, NV, and the provenance marker are defined in Table~\ref{tab:transformer_medseg}.}
+ \label{tab:mamba_seg}
+ \end{table*}
+ 
+@@ -1323,7 +1323,7 @@
+ & Same volumetric prompt protocol. Small, low-contrast tumor segmentation task. \\
+ 
+ SAM-Med3D-MoE \citep{wang2024sam}
+-& SPPIN2023 neuroblastoma
++& SPPIN 2023 neuroblastoma
+ & General and task-specific expert routing
+ & DSC
+ & 48.9\%
+@@ -1371,6 +1371,26 @@
+ The clinical implications depend on the intended workflow. Promptable models may be useful for interactive annotation, few-shot adaptation, repeated tasks, or sequential propagation. Fully automated deployment additionally requires assessment of target-task accuracy, conditioning reliability, external-domain performance, and failure handling; volumetric applications require tests of spatial consistency. These evaluation requirements link the SAM literature to the cross-paradigm analysis below.
+ 
+ 
++
++\subsection{Targeted Contextual Update Through November 2026}
++\label{subsec:context_update_2026}
++
++A targeted update checked on 20 November 2026 adds architectural and evaluation context from seven CVPR 2026 and sixteen MICCAI 2026 publications, including the three CVPR studies already discussed above. These 23 publications are a separate contextual extension to the retrospective synthesis. They do not change its 30 June 2026 boundary, the frozen 95-family inventory, or the configuration-specific numerical evidence in S2. The following descriptions summarize the proposed mechanisms; they do not establish matched improvements across papers.
++
++\paragraph{Local detail and state propagation}
++HEDS-Net combines state-space processing with an axial skip bridge and progressively weighted supervision, whereas VM-NeXT UNet uses parallel convolutional and visual-state-space encoders with gated skips~\citep{fan2026hedsnet_context,cao2026vmnext_context}. AFMamba introduces frequency-guided parallel state-space processing for polyps, and BDFR-Net combines frequency and spatial features with skip alignment for fetal ultrasound~\citep{jiang2026afmamba_context,zhang2026bdfrnet_context}. These designs motivate separate ablations of propagation, boundary cues, and feature transfer under a common training budget.
++
++\paragraph{Volumetric interaction}
++DEM-Mamba uses directional wavelet features and balanced bidirectional scanning, while SRMA-Mamba combines anatomical multi-plane scans with reverse-attention refinement~\citep{zhu2026demmamba_context,zeng2026srmamamba_context}. TranSamba adds cross-plane Mamba blocks to a transformer under plane-level supervision~\citep{lyu2026transamba_context}. PlaneCycle instead reuses a two-dimensional pretrained backbone through cyclic aggregation over orthogonal planes~\citep{yu2026planecycle_context}. Its lifting operator requires no parameter updates, but downstream linear probing and fine-tuning remain distinct evaluation regimes. Voxel anisotropy, label availability, and full-volume inference cost are therefore necessary comparison conditions.
++
++\paragraph{Pretrained representations and domain adaptation}
++Dino U-Net couples a frozen DINOv3 encoder to dual-branch adaptation and fidelity-aware projection; Glasses combines DINOv3 adaptation with a boundary-sensitive convolutional branch and fine-tunes terminal backbone layers~\citep{li2026dinounet_context,zhu2026glasses_context}. SCFNet adapts convolutional aggregation and decoder fusion to the input, while SSUG combines spectral variation, uncertainty-guided gating, and consistency for SAM generalization~\citep{tang2026scfnet_context,li2026ssug_context}. APEX-SAM retrieves support exemplars and constructs anatomical prompts; spatio-semantic contextual prompting fuses spatial and semantic priors into dense prompts for frozen SAM-Med3D~\citep{mao2026apexsam_context,chattopadhyay2026contextprompts_context}. Their transfer claims require explicit support--query separation and untouched external domains.
++
++\paragraph{Adaptation cost, supervision, and reasoning}
++Dual-Adaptive SAM3 routes visual and textual inputs through low-rank experts, whereas IAD transfers teacher knowledge through semantic alignment and student-oriented assimilation~\citep{chen2026dasam3_context,hong2026iad_context}. WeakMed uses mask-to-box alignment and scale consistency during training; SD-FSMIS adapts diffusion features through support--query interaction and visual conditioning~\citep{wei2026weakmed_context,li2026sdfsmis_context}. CG-Reasoner links mask prediction with centroid-based positional reasoning~\citep{polamreddy2026cgreasoner_context}. These mechanisms should be assessed with explicit training, annotation, prompting, and inference budgets; language consistency is a separate outcome from mask accuracy.
++
++\paragraph{Risk-controlled evaluation}
++Conformal Lesion Segmentation calibrates a post-processing threshold to control case-level violations of a voxel-wise false-negative tolerance under exchangeability~\citep{tan2026cls_context}. It is evaluation and post-processing context rather than an additional architectural family. The guarantee does not independently control the false-positive rate or remove the need to examine distribution shift.
+ 
+ \section{Open challenges and future directions}
+ \label{sec:unified_challenges}
+@@ -2069,11 +2089,10 @@
+  \textbf{Nand Kumar Yadav:} Conceptualization, Methodology, Investigation, Writing -- original draft. \textbf{Smriti Regmi:} Investigation, Data curation. \textbf{Moinak Bose:} Investigation, Visualization. \textbf{N. Reed Alexander:} Writing -- review \& editing. \textbf{Debesh Jha:} Supervision, Writing -- review \& editing. \textbf{William CW Chen:} Supervision, Writing -- review \& editing.
+ 
+ \section*{Data availability}
+--No patient-level data or new experimental measurements were generated. Supplementary Data S1 (\path{method_register.csv}) contains the method inventory and family assignments; Supplementary Data S2 (\path{numerical_verification.csv}) contains the numerical source-verification records and unresolved fields. These files are included in the accompanying editable source package with the manuscript, bibliography, and figure sources. No separate public archive has been deposited. Published datasets and implementations are identified through their cited sources.
+-+No patient-level data or new experimental measurements were generated. Supplementary Data S1 (\path{method_register.csv}) contains the method inventory and family assignments; Supplementary Data S2 (\path{numerical_verification.csv}) contains the numerical source-verification records and unresolved fields. These files and the explanatory supplementary document are maintained in the project GitHub repository at \url{https://github.com/nandkyadavusa/Medical-Image-Segmentation-Survey/tree/main/supplementary}. The repository is currently access-controlled; public release and a persistent archival DOI have not yet been established. Published datasets and implementations are identified through their cited sources.
++No patient-level data or new experimental measurements were generated. Supplementary Data S1 (\path{method_register.csv}) contains the method inventory and family assignments; Supplementary Data S2 (\path{numerical_verification.csv}) contains the numerical source-verification records and unresolved fields. These files, the cell-level revision audit, and the explanatory supplementary document are included in the accompanying source package and maintained at \url{https://github.com/nandkyadavusa/Medical-Image-Segmentation-Survey/tree/main/supplementary}. The repository remains access-controlled; a public archive and persistent archival DOI have not yet been established. Published datasets and implementations are identified through their cited sources.
++
++
+  
+- \section*{Declaration of generative AI and AI-assisted technologies in the writing process}
+- During manuscript preparation, GPT-based tools were used to assist with language editing. The authors retain full responsibility for source verification, interpretation, originality, and the final submitted content.
+ 
+ \section*{Declaration of generative AI and AI-assisted technologies in the writing process}
+ During manuscript preparation, GPT-based tools were used to assist with language editing, literature organization, source-checking records, mathematical exposition, and schematic figure preparation. The authors retain full responsibility for source verification, interpretation, originality, and the final submitted content.
+@@ -2082,7 +2101,7 @@
+ 
+ 
+ \bibliographystyle{elsarticle-harv-en}
+-\bibliography{referencef,review_corrections,additional_review_refs,evidence_implementation,numeric_sources}
++\bibliography{referencef,review_corrections,additional_review_refs,evidence_implementation,numeric_sources,new_papers_verified,transformer_numeric_refs}
+ 
+ 
+ \end{document}

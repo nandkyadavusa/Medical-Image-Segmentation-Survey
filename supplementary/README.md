@@ -1,21 +1,31 @@
-# Supplementary evidence for the medical segmentation architecture review
+# Supplementary evidence: version 2026-11-20
 
-These files accompany the manuscript **A Taxonomy of Architectural Transitions in Medical Image Segmentation: A Framework for Bottleneck Redistribution**.
+These files accompany **A Taxonomy of Architectural Transitions in Medical Image Segmentation: A Framework for Bottleneck Redistribution**.
 
-**Repository link:** [https://github.com/nandkyadavusa/Medical-Image-Segmentation-Survey/tree/main/supplementary](https://github.com/nandkyadavusa/Medical-Image-Segmentation-Survey/tree/main/supplementary) (private at the time of preparation; reviewer access or a public release is required).
+## Contents
 
-| File | Description |
+| File | Scope |
 | --- | --- |
-| `Supplementary_Information.pdf` | Explanatory supplement describing the inventory, counting rules, numerical provenance, and limitations. |
-| `method_register.csv` | **Supplementary Data S1:** inventory of 95 counted segmentation method families plus 40 contextual or excluded records. |
-| `numerical_verification.csv` | **Supplementary Data S2:** 68 source-specific numerical verification/audit records covering manuscript Tables 6, 8, 9, 10, and 11. |
+| method_register.csv | S1: 95 counted method families and 40 contextual/excluded records; 135 rows. Retrospective membership is unchanged; numerical-verification notes are synchronized with the revised S2. |
+| numerical_verification.csv | S2: 68 source-specific numerical records, revised on 20 November 2026 while preserving stable IDs and prior history. |
+| nv_cell_audit_2026-11-20.csv | All 72 previously withheld numerical entries: 26 numerical recoveries, 33 inspected-source nonreports, 12 unresolved values, and one unsupported dataset entry removed. |
+| contextual_update_2026.csv and .bib | 23 separately identified CVPR/MICCAI 2026 contextual publications; excluded from the frozen S1 count. |
+| Supplementary_Information.pdf and .tex | Interpretation, status definitions, unresolved questions, and scope. |
+| SHA256SUMS.txt | Exact file hashes for this snapshot. |
+| CITATION.cff | Citation metadata for the supplementary compilation. |
 
 ## Interpretation
 
-The inventory is a **purposive narrative synthesis**, not a systematic-search screening log or an exhaustive census of the literature. Method variants are grouped under their counted family. Numerical results retain their source, model configuration, evaluation protocol, and unresolved fields. `NV` denotes a value withheld or not verified for the relevant configuration; it must not be silently converted to zero or treated as evidence that the original article did not report it.
+The retrospective literature boundary is 30 June 2026. The November update is targeted, not an exhaustive new search or a reconstructed PRISMA screening log. Numerical provenance and comparability are separate. Later evaluation values are explicitly attributed in the manuscript and S2.
 
-Source-specific verification does not imply independent model retraining, replication, or full verification of every experiment. Heterogeneous benchmark results should not be pooled into a cross-paper leaderboard or used to infer architectural causality without matched evaluation conditions.
+**NR** means no exact-configuration value was reported in the inspected source version. It is not a claim that no later paper or implementation reports one. **NV** means verification remains unresolved because of source access, variant attribution, or units. Neither means zero. Classifying a missing measurement as NR does not recover a number.
 
-**Literature coverage boundary:** 30 June 2026. Targeted supplementary source checks were recorded in November 2026.
+No patient data, trained models, third-party full papers, new experiments, or independent model profiling are included. Computational costs retain the source's accounting limits. A transcription of H2Former's original article was inspected through a mirror; that access limitation is documented.
 
-The three files are provided unchanged from the author's supplementary package. Please cite the associated manuscript when reusing the review's organization or conclusions. Publication of this repository alone does not confer a DOI; a versioned release can subsequently be archived on Zenodo.
+## Unresolved measurements
+
+Twelve numerical entries remain NV: CBAM-U-Net (four), SegMamba-V2 (four), FCT-384 costs (two), and FAT-Net/BATFormer operation-count units (one each). MIST's retained source aggregate also differs from the simple mean of its printed organ values; this separate aggregation issue remains documented.
+
+## Version and reuse
+
+Version: 2026-11-20. The accompanying MIT license is copied from the existing project repository. This compilation does not change rights in the cited publications. Cite the manuscript for its interpretation and the exact version of these records when using the audit. A GitHub version is not a DOI; no DOI is claimed by this package.

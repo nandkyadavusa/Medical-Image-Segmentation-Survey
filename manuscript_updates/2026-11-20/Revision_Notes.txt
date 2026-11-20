@@ -1,0 +1,60 @@
+REVISION NOTES — 20 November 2026
+
+Basis: the latest uploaded Pasted text(6).txt. This revision changes factual
+table entries, source notes, two spelling/spacing issues, availability wording,
+and the requested contextual paper update. It is not a broad language rewrite.
+
+1. SPPIN2023 is now SPPIN 2023.
+2. The one prose occurrence of pre-specified is now prespecified. The prose
+   contains 14 consistent occurrences; one additional commented example is
+   not part of the rendered manuscript.
+3. The duplicated pasted data-availability alternatives and duplicate short
+   AI-use declaration were removed. The fuller original disclosure remains.
+4. The source had 77 NV tokens, comprising 72 numerical table entries and
+   five explanatory mentions. All 72 are documented in the cell-level audit:
+       26 source-reported numerical entries recovered;
+       33 classified NR (not reported for the exact displayed configuration
+          in the inspected source version);
+       12 remain NV (verification unresolved);
+        1 unsupported UCTransNet ISIC outcome removed.
+   NR is not a recovered measurement. In total, 45 numerical measurements
+   remain unavailable (33 NR + 12 NV). Neither NR nor NV means zero.
+5. Remaining NV entries: CBAM-U-Net (4), SegMamba-V2 (4), FCT-384 costs (2),
+   FAT-Net operation-count units (1), and BATFormer operation-count units (1).
+   MIST's source aggregate versus the mean of its printed organ values is a
+   separate unresolved issue and was not silently recalculated.
+6. Later evaluation/reimplementation values are explicitly attributed with
+   the manuscript's provenance marker. They are not presented as comparable
+   original-author measurements. Profiling conventions remain source-specific.
+   H2Former was inspected through a transcription of its original article on
+   a mirror; that access qualification is recorded in S2.
+7. T-Mamba's comparator is now explicit: PMFSNet3D 91.30 DSC / HD 5.57 mm;
+   T-Mamba 93.60 / 1.18 mm. The +2.30 DSC-point / -4.39 mm changes are not
+   standard deviations. The original table inherits most baseline results.
+8. The 23 verified CVPR/MICCAI 2026 records are integrated as a targeted
+   November 2026 contextual update: 3 were already cited and 20 citations
+   are newly integrated. The frozen retrospective inventory remains 95
+   counted families plus 40 contextual/excluded records. S1's verification
+   notes are synchronized without changing its membership or family counts.
+   S2 retains all 68 record identifiers and its previous audit history.
+9. Two added bibliography files supply the contextual papers and the four
+   later numerical sources. The active bibliography has no duplicate keys
+   or missing cited keys; all 23 contextual records are cited.
+
+BUILD AND VISUAL CHECKS
+
+The revised manuscript was freshly compiled to 38 pages; the supplementary
+document to 4 pages. There are no undefined citations/references or fatal
+errors. Changed numerical tables, the contextual subsection, SAM spacing,
+availability text, and all supplementary pages were visually inspected.
+The supplement's long filenames/field names now wrap inside the margins.
+
+The supplied manuscript PDF uses the source's existing article/review-compat
+fallback because elsarticle.cls is absent in the build environment. A system
+with elsarticle installed will use that class automatically, so pagination
+may differ. The source package includes all original figures, bibliography
+files, the bibliography style, and the existing fallback style.
+
+PUBLICATION STATUS
+
+Public deposit remains pending: the existing GitHub repository is private. The supplied archive ZIP is ready for publication, but no public archive or DOI is claimed.

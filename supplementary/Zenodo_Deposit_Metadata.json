@@ -1,0 +1,35 @@
+{
+  "title": "Supplementary evidence for A Taxonomy of Architectural Transitions in Medical Image Segmentation: A Framework for Bottleneck Redistribution",
+  "upload_type": "dataset",
+  "description": "Versioned S1 method inventory, S2 source-specific numerical audit, cell-level follow-up, and a separately identified contextual literature update. No patient-level data or new experiments.",
+  "creators": [
+    {
+      "name": "Yadav, Nand Kumar"
+    },
+    {
+      "name": "Regmi, Smriti"
+    },
+    {
+      "name": "Bose, Moinak"
+    },
+    {
+      "name": "Alexander, N. Reed"
+    },
+    {
+      "name": "Jha, Debesh"
+    },
+    {
+      "name": "Chen, William C. W."
+    }
+  ],
+  "version": "2026-11-20",
+  "publication_date": "2026-11-20",
+  "license": "mit",
+  "keywords": [
+    "medical image segmentation",
+    "architectural taxonomy",
+    "numerical provenance",
+    "literature review"
+  ],
+  "access_right": "open"
+}

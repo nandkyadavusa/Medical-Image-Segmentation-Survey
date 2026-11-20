@@ -1,0 +1,1 @@
+The files are prepared for a public, versioned deposit. No public repository or DOI has been created by this package. The existing project repository remains private. Publication requires an authenticated GitHub browser session (or a separately authorized archive account). Do not describe the preparation package as a published archive.

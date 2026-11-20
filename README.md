@@ -29,16 +29,22 @@ We argue that segmentation architectures operate under **four competing objectiv
 
 **We welcome contributions!** Feel free to open a pull request when new relevant work is published.
 
+### 20 November 2026: LaTeX integration and numerical follow-up
+
+The 23 verified CVPR/MICCAI 2026 contextual papers are now integrated into the revised manuscript (three were already cited; twenty additional citations are integrated). The [LaTeX update and exact patch](manuscript_updates/2026-11-20/) preserve the retrospective 95-family scope and identify the November update separately.
+
+The [revised supplementary records](supplementary/) account for all 72 previously withheld numerical table entries: 26 recovered numerical entries, 33 inspected-source nonreports (NR), 12 unresolved values (NV), and one unsupported dataset outcome removed. S1 retains its membership and updates verification notes; S2 retains all 68 record identifiers. NR is not a recovered measurement. The existing repository remains private; a separate public archival deposit is pending.
+
 ### November 2026: 11 additional curated papers
 
-Eleven more official CVPR/MICCAI 2026 papers have been added across volumetric Mamba, DINOv3 segmentation, foundation-model transfer, weak supervision, distillation, and clinical reasoning. These are a **repository reading-list extension**, not additions to the frozen 95-method manuscript inventory or the S2 numerical audit.
+Eleven more official CVPR/MICCAI 2026 papers have been added across volumetric Mamba, DINOv3 segmentation, foundation-model transfer, weak supervision, distillation, and clinical reasoning. These records were first added as a **repository reading-list extension** and are now discussed in the separately labeled November manuscript update. They are excluded from the frozen 95-method inventory and the S2 numerical audit.
 
 - [Annotated November 2026 additions](NEW_ADDITIONS_NOV2026.md)
 - [Machine-readable November 2026 paper index](new_additions_nov2026.csv)
 
 ### Newly verified papers (2026)
 
-**Twelve additional CVPR/MICCAI 2026 papers are now listed inline in the architecture categories below**, using the standard [Paper]/[Code] format. Details and proposed validation questions are available in the [curated 2026 paper additions](ADDITIONAL_PAPERS_2026.md) and [CSV index](additional_papers_2026.csv). Nine MICCAI 2026 additions postdate the manuscript's 30 June 2026 coverage cutoff. These README additions do **not** alter the frozen 95-method inventory or its supplementary evidence files.
+**Twelve additional CVPR/MICCAI 2026 papers are now listed inline in the architecture categories below**, using the standard [Paper]/[Code] format. Details and proposed validation questions are available in the [curated 2026 paper additions](ADDITIONAL_PAPERS_2026.md) and [CSV index](additional_papers_2026.csv). Nine MICCAI 2026 additions postdate the manuscript's 30 June 2026 coverage cutoff. These publications are now also discussed in the separate November manuscript update; they do **not** alter the frozen 95-method inventory or enter its configuration-level numerical audit.
 
 
 ---
@@ -600,3 +606,4 @@ We borrow the structure of this repository from [Awesome Diffusion Models in Med
 ## Star History
 
 If you find this work useful, please consider giving it a ⭐!
+
