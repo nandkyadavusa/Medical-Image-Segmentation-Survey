@@ -1,4 +1,4 @@
-# A Multi-Objective Perspective on Architectures and Design in Medical Image Segmentation
+# A Taxonomy of Architectural Transitions in Medical Image Segmentation: A Framework for Bottleneck Redistribution
 
 [![arXiv](https://img.shields.io/badge/arXiv-2025.XXXXX-b31b1b.svg)](https://arxiv.org/abs/2025.XXXXX)
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
@@ -21,8 +21,8 @@
 This repository provides a **curated, structured collection** of 100+ methods in medical image segmentation, organized by architectural paradigm. It accompanies our survey paper:
 
 > **A Multi-Objective Perspective on Architectures and Design in Medical Image Segmentation**  
-> Nand Kumar Yadav, Moinak Bose, Debesh Jha, and William C. W. Chen  
-> University of South Dakota, 2025  
+> Nand Kumar Yadavb, Smriti Regmi, Moinak Bose, N. Reed Alexander, Debesh Jha, William CW Chen  
+> University of South Dakota, 2026 
 > [[Paper]](https://arxiv.org/abs/2025.XXXXX)
 
 We argue that segmentation architectures operate under **four competing objectives** — local spatial precision, global contextual reasoning, computational efficiency, and cross-domain generalization — and that no single architecture can optimize all four simultaneously (**The Redistribution Law**).
