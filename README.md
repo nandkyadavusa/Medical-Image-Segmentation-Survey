@@ -22,7 +22,7 @@ We argue that segmentation architectures operate under **four competing objectiv
 
 ### Newly verified papers (2026)
 
-See the [curated 2026 paper additions](ADDITIONAL_PAPERS_2026.md) and the [machine-readable index](additional_papers_2026.csv) for 12 additional CVPR/MICCAI publications, technical mechanisms, official links, and proposed diagnostic comparisons. This reading list is separate from the manuscript's fixed 95-method inventory and does not change its literature cutoff or supplementary evidence files.
+**Twelve additional CVPR/MICCAI 2026 papers are now listed inline in the architecture categories below**, using the standard [Paper]/[Code] format. Details and proposed validation questions are available in the [curated 2026 paper additions](ADDITIONAL_PAPERS_2026.md) and [CSV index](additional_papers_2026.csv). Nine MICCAI 2026 additions postdate the manuscript's 30 June 2026 coverage cutoff. These README additions do **not** alter the frozen 95-method inventory or its supplementary evidence files.
 
 
 ---
@@ -164,6 +164,18 @@ We decompose segmentation architectures into **three functional components**:
 - **CBAM-U-Net: Liver Tumor Segmentation Using CBAM**  
   *Beevi et al.* [2023]  
   [[Paper]](https://link.springer.com/chapter/10.1007/978-981-99-2602-2_1)
+
+- **PMRNet: Physics-informed Multi-scale Refinement Network for Medical Image Segmentation**  
+  *Kang et al.* [CVPR 2026]  
+  [[Paper]](https://openaccess.thecvf.com/content/CVPR2026/html/Kang_PMRNet_Physics-informed_Multi-scale_Refinement_Network_for_Medical_Image_Segmentation_CVPR_2026_paper.html) [[Code]](https://github.com/KangBoce/PMRNet)
+
+- **Modality-Agnostic Domain Generalizable Medical Image Segmentation via Self-Coordinated Focusing**  
+  *Tang et al.* [MICCAI 2026]  
+  [[Paper]](https://papers.miccai.org/miccai-2026/0666-Paper1055.html)
+
+- **BDFR-Net: Boundary-Aware Dual-Domain Feature Reconstruction Network for Fetal Ultrasound Image Segmentation**  
+  *Zhang et al.* [MICCAI 2026]  
+  [[Paper]](https://papers.miccai.org/miccai-2026/0092-Paper3612.html) [[Code]](https://github.com/CodeCQ789/BDFR-Net)
 
 ### 3D and Volumetric CNN Models
 
@@ -312,6 +324,14 @@ We decompose segmentation architectures into **three functional components**:
   *Gong et al.* [IEEE ISBI 2025]  
   [[Paper]](https://arxiv.org/abs/2402.03526) [[Code]](https://github.com/lhaof/nnMamba)
 
+- **HEDS-Net: A Hybrid State-Space Architecture with Axial Bridge and Progressive Weighting for Medical Image Segmentation**  
+  *Fan et al.* [MICCAI 2026]  
+  [[Paper]](https://papers.miccai.org/miccai-2026/0452-Paper4167.html) [[Code]](https://github.com/Momentisbeused/HEDS-Net)
+
+- **VM-NeXT UNet: Synergizing ConvNeXT and Visual Mamba for Robust Medical Image Segmentation**  
+  *Cao and Jiang* [MICCAI 2026]  
+  [[Paper]](https://papers.miccai.org/miccai-2026/1140-Paper4748.html)
+
 ### Pure SSM / Mamba Architectures
 
 - **VM-UNet: Vision Mamba UNet for Medical Image Segmentation**  
@@ -438,6 +458,10 @@ We decompose segmentation architectures into **three functional components**:
   *Gao et al.* [MICCAI 2024]  
   [[Paper]](https://arxiv.org/abs/2306.00499) [[Code]](https://github.com/yifangao112/DeSAM)
 
+- **Segment Anything Model with Symmetric Spectral Uncertainty Gating for Generalizable Medical Image Segmentation**  
+  *Li et al.* [MICCAI 2026]  
+  [[Paper]](https://papers.miccai.org/miccai-2026/0934-Paper4696.html) [[Code]](https://github.com/HiLab-git/SSUG)
+
 ### Few-Shot and Support-Based Methods
 
 - **SAM-MPA: Applying SAM to Few-Shot Medical Image Segmentation Using Mask Propagation and Auto-Prompting**  
@@ -470,11 +494,25 @@ We decompose segmentation architectures into **three functional components**:
   *Yue et al.* [AAAI 2024]  
   [[Paper]](https://arxiv.org/abs/2308.12492) [[Code]](https://github.com/wenxi-yue/SurgicalSAM)
 
+- **Glasses: Adapter-Enhanced DINOv3 with Boundary-Aware Multi-Scale Representations for Medical Image Segmentation**  
+  *Zhu et al.* [MICCAI 2026]  
+  [[Paper]](https://papers.miccai.org/miccai-2026/0429-Paper1781.html) [[Code]](https://github.com/friay/Glasses)
+
 ### Video and Temporal Extensions
 
 - **SAM2-Med: Medical SAM 2 for Medical Image and Video Segmentation**  
   *Zhu et al.* [2024]  
   [[Paper]](https://arxiv.org/abs/2408.00874) [[Code]](https://github.com/MedicineToken/Medical-SAM2)
+
+### Vision–Language Foundation Models
+
+- **MedCLIPSeg: Probabilistic Vision-Language Adaptation for Data-Efficient and Generalizable Medical Image Segmentation**  
+  *Koleilat et al.* [CVPR 2026]  
+  [[Paper]](https://openaccess.thecvf.com/content/CVPR2026/html/Koleilat_MedCLIPSeg_Probabilistic_Vision-Language_Adaptation_for_Data-Efficient_and_Generalizable_Medical_Image_CVPR_2026_paper.html)
+
+- **VoxTell: Free-Text Promptable Universal 3D Medical Image Segmentation**  
+  *Rokuss et al.* [CVPR 2026]  
+  [[Paper]](https://openaccess.thecvf.com/content/CVPR2026/html/Rokuss_VoxTell_Free-Text_Promptable_Universal_3D_Medical_Image_Segmentation_CVPR_2026_paper.html) [[Code]](https://github.com/MIC-DKFZ/VoxTell)
 
 ### Clinical Reasoning and Prompt Engineering
 
@@ -485,6 +523,10 @@ We decompose segmentation architectures into **three functional components**:
 - **SegPrompt: Boosting Open-World Segmentation via Category-Level Prompt Learning**  
   *Zhu et al.* [ICCV 2023]  
   [[Paper]](https://openaccess.thecvf.com/content/ICCV2023/papers/Zhu_SegPrompt_Boosting_Open-world_Segmentation_via_Category-level_Prompt_Learning_ICCV_2023_paper.pdf)
+
+- **Uncertainty-Aware Spatio-Semantic Contextual Prompts for Multimodal Medical Segmentation**  
+  *Chattopadhyay et al.* [MICCAI 2026]  
+  [[Paper]](https://papers.miccai.org/miccai-2026/1102-Paper0892.html) [[Code]](https://github.com/ucsdbiag/spatio-semantic-in-context-segmentation)
 
 ---
 
@@ -498,6 +540,10 @@ Medical Image Segmentation**
 - **Capsule-Expert Routing UNet: A Hybrid 2.5D Convolution-Attention Architecture with MoE for 3D Medical Segmentation**  
   *Yadav et al.* [2026]  
   [[Paper]](https://openreview.net/forum?id=ul9DA3jI3A)
+
+- **Dual-Adaptive SAM3: Hierarchical Routing over Low-Rank Expert Layers for Parameter-Efficient Medical Image Segmentation**  
+  *Chen et al.* [MICCAI 2026]  
+  [[Paper]](https://papers.miccai.org/miccai-2026/0308-Paper0711.html)
 
 ---
 
@@ -522,6 +568,10 @@ Medical Image Segmentation**
 | **HD95** | 95th percentile Hausdorff Distance | Boundary accuracy; clinically relevant |
 | **Params (M)** | Total trainable parameters | Model complexity |
 | **GFLOPs** | Floating-point operations | Computational cost |
+
+- **Conformal 3D Lesion Segmentation with Balanced Risk Control**  
+  *Tan et al.* [MICCAI 2026]  
+  [[Paper]](https://papers.miccai.org/miccai-2026/0194-Paper2825.html) [[Code]](https://github.com/binyutan/CLS)
 
 ---
 
