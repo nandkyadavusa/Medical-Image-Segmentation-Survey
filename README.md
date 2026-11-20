@@ -21,7 +21,7 @@
 This repository provides a **curated, structured collection** of 100+ methods in medical image segmentation, organized by architectural paradigm. It accompanies our survey paper:
 
 > **A Taxonomy of Architectural Transitions in Medical Image Segmentation: A Framework for Bottleneck Redistribution**  
-> Nand Kumar Yadavb, Smriti Regmi, Moinak Bose, N. Reed Alexander, Debesh Jha, William CW Chen  
+> Nand Kumar Yadav, Smriti Regmi, Moinak Bose, N. Reed Alexander, Debesh Jha, William CW Chen  
 > University of South Dakota, 2026 
 > [[Paper]](https://arxiv.org/abs/2025.XXXXX)
 
@@ -58,7 +58,7 @@ If you find this repository useful, please cite our survey:
 ```bibtex
 @article{yadav2025multiobjective,
   title={A Taxonomy of Architectural Transitions in Medical Image Segmentation: A Framework for Bottleneck Redistribution},
-  author={Nand Kumar Yadavb, Smriti Regmi, Moinak Bose, N. Reed Alexander, Debesh Jha, William CW Chen  },
+  author={Nand Kumar Yadav, Smriti Regmi, Moinak Bose, N. Reed Alexander, Debesh Jha, William CW Chen},
   journal={arXiv preprint arXiv:2025.XXXXX},
   year={2026}
 }
