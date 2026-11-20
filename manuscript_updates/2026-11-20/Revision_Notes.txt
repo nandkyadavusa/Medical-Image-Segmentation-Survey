@@ -9,7 +9,7 @@ and the requested contextual paper update. It is not a broad language rewrite.
    contains 14 consistent occurrences; one additional commented example is
    not part of the rendered manuscript.
 3. The duplicated pasted data-availability alternatives and duplicate short
-   AI-use declaration were removed. The fuller original disclosure remains.
+   AI-use declaration were removed. A single detailed AI-use declaration remains.
 4. The source had 77 NV tokens, comprising 72 numerical table entries and
    five explanatory mentions. All 72 are documented in the cell-level audit:
        26 source-reported numerical entries recovered;
@@ -41,19 +41,46 @@ and the requested contextual paper update. It is not a broad language rewrite.
    later numerical sources. The active bibliography has no duplicate keys
    or missing cited keys; all 23 contextual records are cited.
 
+FINAL SUBMISSION CORRECTIONS
+
+The follow-up applies 18 local prose edits, two small caption grammar repairs,
+and the following factual/disclosure corrections:
+
+- SAM-Med3D-MoE now identifies bounding-box prompting for its 48.9% SPPIN
+  result and 32.3% baseline. S2-T11-R12 now cites Table 1, PDF page 7 and
+  retains the earlier audit history. No outcome or cost value is changed.
+- The existing MIST source-aggregation discrepancy is made explicit in its
+  table note; the source-reported value is retained.
+- CBAM-U-Net author initials are corrected to A. R. Sabari Sundar, with the
+  publication year 2024 retained.
+- The AI declaration identifies ChatGPT and the known final-revision model.
+  Seven schematic figures and three corrected panels carry specific drawing-
+  assistance disclosures. Historical model versions were not recorded in the
+  project files; this is stated explicitly rather than guessed. The original
+  raster panels have not been reassigned an unsupported creation history.
+- Data availability identifies the accompanying supplementary files as the
+  primary evidence-access route. A separate public archive is still pending.
+- Elsevier's official article class is bundled locally with its source/license
+  provenance. Courier is loaded for the monospace font used in the build.
+
+Final_Submission_Corrections.patch gives only this follow-up delta. The full
+Minimal_Changes.patch still compares against the original uploaded manuscript.
+Submission_Supplements.zip is the clean supplementary-file bundle for upload.
+
 BUILD AND VISUAL CHECKS
 
-The revised manuscript was freshly compiled to 38 pages; the supplementary
+The revised manuscript was freshly compiled to 39 pages; the supplementary
 document to 4 pages. There are no undefined citations/references or fatal
 errors. Changed numerical tables, the contextual subsection, SAM spacing,
 availability text, and all supplementary pages were visually inspected.
 The supplement's long filenames/field names now wrap inside the margins.
 
-The supplied manuscript PDF uses the source's existing article/review-compat
-fallback because elsarticle.cls is absent in the build environment. A system
-with elsarticle installed will use that class automatically, so pagination
-may differ. The source package includes all original figures, bibliography
-files, the bibliography style, and the existing fallback style.
+The supplied manuscript PDF now uses the official Elsevier article class
+(elsarticle 3.5), with the existing 5p/times/author-year options. The source
+package includes the class and source/license provenance, all original figures,
+bibliography files, and the existing fallback style. Pagination differs from
+the earlier 38-page fallback build because the journal class has different
+page geometry and typography.
 
 PUBLICATION STATUS
 

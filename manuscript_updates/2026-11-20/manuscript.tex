@@ -49,6 +49,7 @@
 % declarations for front matter
 
 \usepackage{helvet}
+\usepackage{courier}
 
 \begin{document}
 
@@ -100,7 +101,7 @@ Biomedical Image Segmentation; U-Net; Transformer; Swin Transformer; Mamba; Segm
 
 While many architectures for medical image segmentation have been proposed and reported to achieve excellent results, explaining these results in terms of information-processing mechanisms remains challenging. A higher Dice score may reflect a different cohort split, input resolution, training strategy, or post-processing rather than architecture alone. We therefore ask three questions that cannot be resolved by a leaderboard: (i) What capability does an intervention add? (ii) Under which conditions is it useful? (iii) Which additional constraint, if any, becomes limiting?
 
-Four design goals are frequently mentioned in the literature for medical image segmentation: local spatial precision, global contextual reasoning, computational efficiency, and cross-domain generalization. Each of these goals represents a different demand on a segmentation system and thus is not equivalent to another goal. For example, convolutional operators provide strong local spatial precision and translation bias, which are beneficial for preserving boundaries, small structures, and low-contrast regions~\citep{ronneberger2015unet,oktay2018attentionunet,isensee2021nnu}. Self-attention allows for direct interaction between distant regions, but the cost of self-attention increases rapidly with the number of tokens~\citep{dosovitskiy2021vit,chen2021transunet,hatamizadeh2022unetr}. Selective state-space models provide another form of long-range propagation, but vision models must first decide how to order a two- or three-dimensional anatomy for sequential processing~\citep{gu2023mamba}. Promptable models such as SAM provide large-scale pretrained representations and can be flexibly used with user guidance, but their performance on medical images still depends on domain adaptation, the quality of the prompts, and consistency across slices or volumes~\citep{kirillov2023sam,ma2024medsam}.
+Four design goals are frequently mentioned in the literature for medical image segmentation: local spatial precision, global contextual reasoning, computational efficiency, and cross-domain generalization. Each of these goals places a distinct demand on a segmentation system. For example, convolutional operators provide strong local spatial precision and translation bias, which are beneficial for preserving boundaries, small structures, and low-contrast regions~\citep{ronneberger2015unet,oktay2018attentionunet,isensee2021nnu}. Self-attention allows for direct interaction between distant regions, but the cost of self-attention increases rapidly with the number of tokens~\citep{dosovitskiy2021vit,chen2021transunet,hatamizadeh2022unetr}. Selective state-space models provide another form of long-range propagation, but vision models must first decide how to order a two- or three-dimensional anatomy for sequential processing~\citep{gu2023mamba}. Promptable models such as SAM provide large-scale pretrained representations and can be flexibly used with user guidance, but their performance on medical images still depends on domain adaptation, the quality of the prompts, and consistency across slices or volumes~\citep{kirillov2023sam,ma2024medsam}.
 
 Each architectural family addresses particular information-processing demands and can therefore coexist with others within a single model. Our analysis uses a \emph{framework for bottleneck redistribution} to examine these combinations. For each architectural intervention, we identify its intended benefit and specify the conditions under which a predicted constraint shift could be tested. Each hypothesis is bounded by a task, an evaluation protocol, a target benefit, and prespecified constraints. An improvement in one metric does not establish that a cost has shifted elsewhere; when multiple objectives improve, the predicted constraint must still be evaluated with an appropriate stress test.
 
@@ -110,7 +111,7 @@ Bottleneck redistribution should not be interpreted as an unavoidable deteriorat
 
 The six transitions that are analyzed in this review-level synthesis are direct-to-adaptive skip transfer, CNN--transformer hybridization, hierarchical and efficient attention, SSM/Mamba state propagation, medical adaptation of promptable foundation models, and conditional routing. Results are presented separately from the review-level synthesis, and numerical values are reported in the protocol in which they were obtained, i.e. they are not treated as interchangeable.
 
-An inventory of the \CorpusTotal{} medical segmentation method families counted in the retrospective synthesis (including CNN/U-Net, transformer, SSM/Mamba, SAM-based, and adaptive-routing architectures) is presented in the accompanying inventory. This inventory aims at coverage of the different mechanisms used for representation building, information exchange across scales, spatial detail recovery, computational resources, and adaptation to changes in task, modality, or domain, rather than at an exhaustive list of all architectures.
+An inventory of the \CorpusTotal{} medical segmentation method families counted in the retrospective synthesis (including CNN/U-Net, transformer, SSM/Mamba, SAM-based, and adaptive-routing architectures) is presented in the accompanying inventory. This inventory aims to cover the mechanisms used for representation building, information exchange across scales, spatial detail recovery, computational resources, and adaptation to changes in task, modality, or domain, rather than at an exhaustive list of all architectures.
 The review makes four main contributions:
 \begin{itemize}
     \item an information-flow taxonomy that places CNN, transformer, SSM/Mamba, promptable foundation-model, and adaptive-routing methods within a common four-objective design space;
@@ -230,7 +231,7 @@ The scope table should therefore be read as a map of emphasis, not as a quality 
 \endgroup
 \caption{Information-flow taxonomy. Families can coexist; routing and fusion
 operate across them. The layout implies no chronology or ranking. Each method
-is counted under one primary family while retaining its hybrid description.}
+is counted under one primary family while retaining its hybrid description. Drawing code and layout were prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 \label{fig:taxonomy}
 \end{figure*}
 
@@ -269,7 +270,7 @@ is counted under one primary family while retaining its hybrid description.}
     {\textbf{6. Fixed $\rightarrow$ conditional allocation}\\Target: allocate capacity to the current input.\\Constraint to test: calibration, utilization, execution overhead.};
 \end{tikzpicture}
 \endgroup
-\caption{Six candidate architectural transitions. Each card separates the intended benefit from constraints that must be specified and measured in a controlled test. A listed constraint is a hypothesis, not an inevitable cost. Joint improvement can contradict a particular redistribution hypothesis within its declared scope.}
+\caption{Six candidate architectural transitions. Each card separates the intended benefit from constraints that must be specified and measured in a controlled test. A listed constraint is a hypothesis, not an inevitable cost. Joint improvement can contradict a particular redistribution hypothesis within its declared scope. Drawing code and layout were prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 \label{fig:redistribution_map}
 \end{figure*}
 
@@ -284,25 +285,25 @@ For a representative two-dimensional, $K$-class setting, let $X \in \mathbb{R}^{
 f_{\theta}: X \rightarrow Y.
 \]
 
-The architectural decisions on what kind of spatial relations the model can represent, what kind of information is kept when the resolution changes and how much computation is needed, are grouped into three functions:
+Architectural decisions about the spatial relations a model can represent, the information retained as resolution changes, and the required computation are grouped into three functions:
 
 \begin{itemize}
-    \item \textbf{Local feature extraction} – capturing local features such as edges, textures, small structures, etc.
+    \item \textbf{Local feature extraction} – capturing local features such as edges, textures, and small structures.
     \item \textbf{Global context modeling} – capturing long-range anatomical and semantic relationships.
     \item \textbf{Feature fusion} – fusing information from different scales and representations during reconstruction.
 \end{itemize}
 
 There are different architectural families for these functions. CNNs use spatially local filters and hierarchical feature extraction, giving them strong local inductive bias. Transformers use self-attention to model long-range interactions between distant regions. State-space models propagate information through latent states and provide an alternative form of long-range modeling with lower asymptotic complexity than full attention. Foundation models add large-scale pretraining and prompt-based adaptation, shifting part of the problem from architecture design to representation transfer and task adaptation.
 
-This also means that different architectural choices lead to different constraints. For example, more contextual interaction can lead to higher memory and computation requirements, as well as the need for more training data. In order to recover fine boundaries, one typically needs to keep high resolution features throughout the network, and the decoder must be sufficiently large. Finally, a network that has been strongly adapted to a certain dataset can have very high accuracy on that dataset, but its performance can be very unstable when applied to other domains.
+This also means that different architectural choices lead to different constraints. For example, more contextual interaction can lead to higher memory and computation requirements, as well as the need for more training data. In order to recover fine boundaries, one typically needs to keep high-resolution features throughout the network, and the decoder must be sufficiently large. Finally, a network that has been strongly adapted to a certain dataset can have very high accuracy on that dataset, but its performance can be very unstable when applied to other domains.
 
-These questions will be used as a basis for the comparison of the different architectural families in the following sections instead of solely reporting the accuracy on the different benchmarks. For each family we will discuss how the representations are built, how anatomical context is handled, how information is propagated between different scales, how the computation is used and how the models behave on different tasks and in different domains.
+These questions will be used as a basis for the comparison of the different architectural families in the following sections instead of solely reporting the accuracy on the different benchmarks. For each family, we discuss how the representations are built, how anatomical context is handled, how information is propagated between different scales, how the computation is used and how the models behave on different tasks and in different domains.
 \subsection{Analytical Constructs and Operational Evidence}
 \label{subsec:constructs}
 
-The four objectives defined in the previous section are used in the analysis of architectural behavior in Section 4. Note that each of the four objectives is not measured by a single metric. For example, local spatial precision is not measured by DSC alone and global contextual reasoning is not measured by HD95 alone. Rather each of the metrics captures some aspect of the objective in question.
+The four objectives defined in the previous section are used in the analysis of architectural behavior in Section 4. Note that each of the four objectives is not measured by a single metric. For example, local spatial precision is not measured by DSC alone and global contextual reasoning is not measured by HD95 alone. Rather, each metric captures some aspect of the objective in question.
 
-Evidence for claims regarding the objectives is most convincing when such evidence actually stresses the capability of interest. Thus, boundary and surface metrics are most relevant for local spatial accuracy, long-range interaction tests, inter-slice consistency, and context-specific ablations are most relevant for global reasoning, and computational efficiency is most relevantly assessed using matched implementation and input settings. Cross-domain generalization is most relevantly assessed on held-out domains that are defined using the same task and label definition.
+Evidence for claims regarding the objectives is most convincing when it stresses the capability of interest. Thus, boundary and surface metrics are most relevant for local spatial accuracy, long-range interaction tests, inter-slice consistency, and context-specific ablations are most relevant for global reasoning, and computational efficiency is most relevantly assessed using matched implementation and input settings. Cross-domain generalization is most relevantly assessed on held-out domains that are defined using the same task and label definition.
 
 Table~\ref{tab:construct_definitions} lists each objective with its corresponding interpretation and evidence that supports it. No single metric is used to represent an objective. Rather, the conclusions are based on measurements and stress tests that are most relevant to the claim being made.
 
@@ -416,12 +417,14 @@ For any numerical comparison, the evidence record should identify the cohort, pa
 \draw[arr] (input)--(metric);\draw[arr] (metric)--(claim);
 \end{tikzpicture}
 \endgroup
-\caption{Evidence-admissibility workflow. The workflow specifies the source and protocol checks required for a comparison, including differences in cohort, label space, split, geometry, metric definition, prompting protocol, and computational scope. Tier A permits protocol-local statements for the compatible metric; Tier B supports contextual interpretation; Tier C provides architectural context only. The workflow does not make unmatched studies experimentally equivalent.}
+\caption{Evidence-admissibility workflow. The workflow specifies the source and protocol checks required for a comparison, including differences in cohort, label space, split, geometry, metric definition, prompting protocol, and computational scope. Tier A permits protocol-local statements for the compatible metric; Tier B supports contextual interpretation; Tier C provides architectural context only. The workflow does not make unmatched studies experimentally equivalent. Drawing code and layout were prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 \label{fig:admissibility_flow}
 \end{figure*}
 
 \subsubsection{Evidence Provenance and Protocol-Comparability Audit}
 \label{subsec:evidence_audit}
+
+ChatGPT (OpenAI) assisted with literature organization and drafting of the source-verification records. The inspected sources, transcribed values, and unresolved fields are documented in S2; the scope of AI assistance is stated in the manuscript-preparation declaration.
 
 Protocol aliasing occurs when results bearing the same dataset name are obtained with different label sets, patient partitions, input dimensionalities, geometries, prompting strategies, metric definitions, or computational-accounting conventions. Figure~\ref{fig:admissibility_flow} summarizes the resulting evidence checks. The inference permitted by a reported result is limited to the protocol fields established in its source record; unresolved fields do not support claims of a strictly matched comparison. For a reported result $r_i$, a comparison record should contain the following tuple:
 \begin{equation}
@@ -452,7 +455,7 @@ C: contextual & Different dimensionality, label ontology, prompting/inference re
 
 Provenance and comparability are two different things. An original method evaluation and an independent reimplementation of the same method are both primary experimental records of the measurement(s) reported by the authors of these records. A later table that only lists a number of measurements, and for each measurement lists the source of the measurement, is a secondary transcription of the measurements in the table. The unresolved verification marker in the numerical tables does not certify the value of the measurement.
 
-The original paper’s metric semantics are used unless the code to release evaluation results provides a more explicit definition of the metrics. For example, the use of HD95 in a paper’s results may be abbreviated as “HD” but any such abbreviation would have to be explicitly stated. Decoder-only cost would not be substituted for whole-model cost, and measurements on different input tensors or datasets would not be combined into a single operating point. Missing variance would not be reconstructed from improvements over other baselines or even from decimal precision.
+The original paper’s metric semantics are used unless the released evaluation code provides a more explicit definition of the metrics. For example, the use of HD95 in a paper’s results may be abbreviated as “HD” but any such abbreviation would have to be explicitly stated. Decoder-only cost would not be substituted for whole-model cost, and measurements on different input tensors or datasets would not be combined into a single operating point. Missing variance would not be reconstructed from improvements over other baselines or even from decimal precision.
 
 This is a set of rules to keep the comparison of results within reasonable bounds, while not being so restrictive as to hide missing protocol details behind false numerical precision. Results that cannot be strictly compared are reported as operating context.
 
@@ -465,7 +468,7 @@ Interpretation of segmentation results depends not only on the models used but a
 
 Abdominal multi-organ CT is a very common setting for the evaluation of the anatomical consistency of models on very different structures in terms of size, shape and even location. However, many papers use the name of the dataset Synapse as if it were the name of the challenge BTCV and vice versa. Synapse is the name of the repository where the data of the challenge BTCV are stored and distributed. The challenge was released in the MICCAI 2015 Multi-Atlas Labeling Beyond the Cranial Vault challenge~\citep{landman2015miccai}.
 
-Most of the reported results on Synapse and BTCV datasets are based on different evaluation protocols. For Synapse dataset, the most popular setting is the 8-organ setting with 18 training images and 12 test images used in TransUNet~\citep{chen2021transunet}. Other settings include 13-organ setting with different splits and even different pre-processing methods. Unless specified otherwise, Synapse dataset in this review refers to the 8-organ setting used in TransUNet~\citep{chen2021transunet}.
+Most of the reported results on Synapse and BTCV datasets are based on different evaluation protocols. For the Synapse dataset, the most popular setting is the 8-organ setting with 18 training images and 12 test images used in TransUNet~\citep{chen2021transunet}. Other settings include a 13-organ setting with different splits and even different pre-processing methods. Unless specified otherwise, the Synapse dataset in this review refers to the 8-organ setting used in TransUNet~\citep{chen2021transunet}.
 
 The large, high-contrast organs in the Synapse dataset can be segmented well by most models. However, success for the smaller, less distinct organs in Synapse depends on a model’s ability to correctly identify the boundaries of the organ as well as to place the organ in the context of the surrounding anatomy. TransUNet~\citep{chen2021transunet}, Swin-Unet~\citep{cao2022swinunet}, and UNETR~\citep{hatamizadeh2022unetr} are three examples of models that have been reported to achieve good results for Synapse. The reported scores for these models are listed in Table~\ref{tab:transformer_medseg} along with information about the dimensionality of the images used, the split of the data into training and test sets, and details of the implementation of the model.
 
@@ -475,7 +478,7 @@ In ACDC~\citep{bernard2018deep}, the geometry of the left ventricle, right ventr
 
 Boundary-sensitive two-dimensional datasets such as the skin lesion benchmarks (e.g. ISIC~\citep{codella2019skin}) contain irregular contours, weak contrast, color variation and even artifacts. Similarly, the polyp segmentation benchmarks (e.g. Kvasir-SEG~\citep{jha2019kvasir} and CVC-ClinicDB~\citep{bernal2015wm}) contain images with varying scale, illumination, viewpoint, specular reflection and motion blur. In such datasets, accurate localization of the object is not sufficient; the model must also be able to accurately delineate the boundary of the object. Models that retain high-resolution features and use multi-scale decoding as well as models with explicit boundary supervision have reported Dice scores of over 90\% in such datasets, emphasizing the importance of local as well as high-frequency features in such models.
 
-The overlap scores reported for state-space architectures (especially Mamba-based ones) on Synapse, ACDC and related datasets are similar to those of transformer-based methods. While the state-space recurrence of such models scales linearly with the sequence length (instead of the quadratic token-interaction cost of full self-attention), the practical runtime and memory cost depends on several factors, including the image dimensionality, the scan direction, the number of scan paths, the kernel implementation, the parallelization and the hardware. In order to preserve spatial details that may be lost when the image or volume is serialized, many medical SSM architectures include convolutional branches or local operators. 
+The overlap scores reported for state-space architectures (especially Mamba-based ones) on Synapse, ACDC and related datasets are similar to those of transformer-based methods. While the state-space recurrence of such models scales linearly with the sequence length (instead of the quadratic token-interaction cost of full self-attention), the practical runtime and memory costs depend on several factors, including the image dimensionality, the scan direction, the number of scan paths, the kernel implementation, the parallelization and the hardware. In order to preserve spatial details that may be lost when the image or volume is serialized, many medical SSM architectures include convolutional branches or local operators. 
 Most medical segmentation studies report a small set of overlap and boundary metrics. The Dice Similarity Coefficient (DSC) remains the most widely used:
 
 \[
@@ -530,7 +533,7 @@ A convincing evaluation should therefore utilize both region-overlap and boundar
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=\textwidth]{assets/architecture_mechanisms.pdf}
-\caption{Six information-flow mechanisms used in medical image segmentation. (a) U-Net connects encoder and decoder features at matched spatial scales~\citep{ronneberger2015unet}. (b) UNet++ adds nested refinement along skip pathways~\citep{zhou2018unetplusplus}. (c) The inter-stage mechanism of DoubleU-Net conditions the second network on the product of the image and the first predicted mask; its final mask combination and internal layers are omitted~\citep{jha2020doubleu}. (d) TransUNet combines convolutional features, token self-attention, and decoder skip pathways~\citep{chen2021transunet}. (e) Selective state-space processing propagates a recurrent state with input-dependent updates and readouts~\citep{gu2023mamba}. (f) Learned input-dependent weights combine expert outputs, as exemplified by skip-pathway mixtures in TA-MoSC~\citep{luo2025tamosc_verified}. Expert number, sparsity, stage count, and layer placement are model-specific. These original schematics isolate mechanisms; arrows indicate data or mixture-weight flow, not a performance ordering.}
+\caption{Six information-flow mechanisms used in medical image segmentation. (a) U-Net connects encoder and decoder features at matched spatial scales~\citep{ronneberger2015unet}. (b) UNet++ adds nested refinement along skip pathways~\citep{zhou2018unetplusplus}. (c) The inter-stage mechanism of DoubleU-Net conditions the second network on the product of the image and the first predicted mask; its final mask combination and internal layers are omitted~\citep{jha2020doubleu}. (d) TransUNet combines convolutional features, token self-attention, and decoder skip pathways~\citep{chen2021transunet}. (e) Selective state-space processing propagates a recurrent state with input-dependent updates and readouts~\citep{gu2023mamba}. (f) Learned input-dependent weights combine expert outputs, as exemplified by skip-pathway mixtures in TA-MoSC~\citep{luo2025tamosc_verified}. Expert number, sparsity, stage count, and layer placement are model-specific. These original schematics isolate mechanisms; arrows indicate data or mixture-weight flow, not a performance ordering. Drawing code and layout were prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 \label{fig:uneteval}
 \end{figure*}
 
@@ -562,7 +565,7 @@ Figure~\ref{fig:original_architecture_panels} expands these mechanisms into repr
 \hfill
 \OriginalArchitecturePanel{figures/moef.png.png}{(f) Sparse MoE layer (generic)}{0.205\textheight}
 \par\vspace{1.0mm}
-\caption{Detailed architecture panels complementing the mechanisms in Figure~\ref{fig:uneteval}. (a) U-Net~\citep{ronneberger2015unet}; (b) UNet++~\citep{zhou2018unetplusplus}; (c) DoubleU-Net~\citep{jha2020doubleu}; (d) TransUNet~\citep{chen2021transunet}; (e) selective state-space processing~\citep{gu2023mamba}; and (f) a generic sparsely routed mixture-of-experts layer~\citep{fedus2022switch,zoph2022st}. The panels show encoder--decoder pathways, nested feature reuse, cascaded mask conditioning, token attention, recurrent state updates, and expert selection with weighted aggregation, respectively. Panel (f) illustrates the sparse-MoE design pattern; the task-adaptive skip mixture discussed in Section~\ref{sec:cnn} has its own routing implementation. These diagrams describe information flow and do not constitute a matched performance comparison.}
+\caption{Detailed architecture panels complementing the mechanisms in Figure~\ref{fig:uneteval}. (a) U-Net~\citep{ronneberger2015unet}; (b) UNet++~\citep{zhou2018unetplusplus}; (c) DoubleU-Net~\citep{jha2020doubleu}; (d) TransUNet~\citep{chen2021transunet}; (e) selective state-space processing~\citep{gu2023mamba}; and (f) a generic sparsely routed mixture-of-experts layer~\citep{fedus2022switch,zoph2022st}. The panels show encoder--decoder pathways, nested feature reuse, cascaded mask conditioning, token attention, recurrent state updates, and expert selection with weighted aggregation, respectively. Panel (f) illustrates the sparse-MoE design pattern; the task-adaptive skip mixture discussed in Section~\ref{sec:cnn} has its own routing implementation. These diagrams describe information flow and do not constitute a matched performance comparison. Panel (c) was revised using vector drawing code prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 \label{fig:original_architecture_panels}
 \end{figure*}
 % END AUTHOR FIGURE fig:original_architecture_panels
@@ -847,7 +850,7 @@ H2Former \citep{he2023h2former} & ISIC2016 & Dice 92.41\% & 33.71 & 33.56 & Hier
 2D BATFormer \citep{lin2023batformer} & ACDC cardiac MRI & Dice 92.84\% & 1.2 & NV & Boundary-aware transformer; original Table IV, 70/10/20 patient split. Its reported F=4.1 is labelled as an operation rate. \\
 
 SwinPA-Net \citep{du2024swinpanet}$^{\dagger}$ & CVC-ClinicDB / Kvasir-SEG & ClinicDB Dice 95.68\%; Kvasir Dice 95.04\% & 102.87 & NR & Dense multiplicative connections and local pyramid attention. Later $256\times256$, 8:1:1 evaluations: \citet{chen2026pcatransunet_nv}, Tables 1--2. \\
-MIST \citep{rahman2024mist} & ACDC/ Synapse & ACDC Dice 92.56\%, Synapse Dice 86.92\%, HD95 11.07 & 95.74 & NR & MaxViT and CAM decoder. Outcomes follow original Tables 1--2; parameters refer to the Synapse ablation. S2 records the source's unresolved Synapse aggregation. \\
+MIST \citep{rahman2024mist} & ACDC/ Synapse & ACDC Dice 92.56\%, Synapse Dice 86.92\%, HD95 11.07 & 95.74 & NR & MaxViT and CAM decoder. Outcomes follow original Tables 1--2; parameters refer to the Synapse ablation. The printed Synapse aggregate differs from the mean of its listed organ scores; S2 records this unresolved discrepancy. \\
 HCTNet \citep{he2023hctnet}$^{\dagger}$ & BUSI breast ultrasound & Dice 81.24\% & 22.20 & 38.91 & Hybrid CNN--transformer with cross-attention. Later $224\times224$ evaluation: \citet{yang2026mambacnn_nv}, Tables 1/3; exact BUSI-only split is unspecified. \\
 
 MT-UNet \citep{reviewfix_wang2021mtunet} & Synapse, ACDC & Synapse DSC 78.59\%, HD95 26.59, ACDC DSC 90.43\% & Synapse 79.07$^{\dagger}$ & Synapse 44.75$^{\dagger}$ & Mixed Transformer U-Net combines local--global Gaussian-weighted self-attention and external attention within a U-shaped architecture. Synapse costs at $224\times224$: \citet{tang2025simmpnet_nv}, Table 2 (MixTrans). \\
@@ -892,7 +895,7 @@ The transformer section ends with a computational question: can long-range depen
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.8\textwidth]{assets/mamba_mechanisms.pdf}
-\caption{Design choices for adapting selective state-space processing to medical images. (a) Planar scan orders serialize two-dimensional features, followed by state updates, merging, and spatial reconstruction, as represented by VM-UNet and Mamba-UNet~\citep{ruan2024vm,wang2024mamba}. (b) Volume-oriented sequences expose different spatial directions to recurrent processing, exemplified by the tri-oriented design of SegMamba~\citep{xing2024segmamba}. (c) Local convolution and state processing can be combined within an encoder--decoder pipeline, as in U-Mamba~\citep{ma2024umamba}. (d) Frequency-domain features can complement spatial/state features, as investigated by EM-Net, HybridMamba, and FaRMamba~\citep{verified_chang2024emnet,wu2025hybridmamba,verified_rong2025farmamba}. The spectral operator, fusion location, and serial or parallel arrangement differ across the cited methods; panel (d) expresses this design axis rather than one shared implementation. These original conceptual diagrams omit implementation-specific blocks and do not establish comparative performance.}
+\caption{Design choices for adapting selective state-space processing to medical images. (a) Planar scan orders serialize two-dimensional features, followed by state updates, merging, and spatial reconstruction, as represented by VM-UNet and Mamba-UNet~\citep{ruan2024vm,wang2024mamba}. (b) Volume-oriented sequences expose different spatial directions to recurrent processing, exemplified by the tri-oriented design of SegMamba~\citep{xing2024segmamba}. (c) Local convolution and state processing can be combined within an encoder--decoder pipeline, as in U-Mamba~\citep{ma2024umamba}. (d) Frequency-domain features can complement spatial/state features, as investigated by EM-Net, HybridMamba, and FaRMamba~\citep{verified_chang2024emnet,wu2025hybridmamba,verified_rong2025farmamba}. The spectral operator, fusion location, and serial or parallel arrangement differ across the cited methods; panel (d) expresses this design axis rather than one shared implementation. These original conceptual diagrams omit implementation-specific blocks and do not establish comparative performance. Drawing code and layout were prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 \label{fig:mamba_architecture_progression}
 \end{figure*}
 
@@ -928,7 +931,7 @@ Figure~\ref{fig:original_mamba_panels} provides complementary architectural view
 \hfill
 \OriginalMambaPanel{figures/LKM UNet.png}{(h) LKM-UNet}{0.170\textheight}
 \par\vspace{1.0mm}
-\caption{Detailed state-space segmentation architectures complementing Figure~\ref{fig:mamba_architecture_progression}. (a) U-Mamba~\citep{ma2024umamba}; (b) SegMamba~\citep{xing2024segmamba}; (c) VM-UNet~\citep{ruan2024vm}; (d) Mamba-UNet~\citep{wang2024mamba}; (e) Swin-UMamba~\citep{liu2024swin}; (f) nnMamba~\citep{gong2025nnmamba}; (g) HybridMamba~\citep{wu2025hybridmamba}; and (h) LKM-UNet~\citep{wang2024lkm}. The panels expose differences in local feature extraction, spatial ordering, hierarchical processing, and fusion. Panel (f) summarizes nnMamba's Mamba-in-Convolution with Channel--Spatial Siamese learning (MICCSS). Experimental comparisons remain tied to the source-specific protocols in Table~\ref{tab:mamba_seg}.}
+\caption{Detailed state-space segmentation architectures complementing Figure~\ref{fig:mamba_architecture_progression}. (a) U-Mamba~\citep{ma2024umamba}; (b) SegMamba~\citep{xing2024segmamba}; (c) VM-UNet~\citep{ruan2024vm}; (d) Mamba-UNet~\citep{wang2024mamba}; (e) Swin-UMamba~\citep{liu2024swin}; (f) nnMamba~\citep{gong2025nnmamba}; (g) HybridMamba~\citep{wu2025hybridmamba}; and (h) LKM-UNet~\citep{wang2024lkm}. The panels expose differences in local feature extraction, spatial ordering, hierarchical processing, and fusion. Panel (f) summarizes nnMamba's Mamba-in-Convolution with Channel--Spatial Siamese learning (MICCSS). Experimental comparisons remain tied to the source-specific protocols in Table~\ref{tab:mamba_seg}. Panel (f) was revised using vector drawing code prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 \label{fig:original_mamba_panels}
 \end{figure*}
 % END AUTHOR FIGURE fig:original_mamba_panels
@@ -1115,11 +1118,11 @@ The SSM/Mamba sample is purposive. We do not estimate the prevalence or maturity
 
 First, \textbf{scanning strategy is a key structural variable}. Four-direction cross-scanning, tri-oriented volumetric decomposition, channel--spatial state processing, pixel--patch dual-scale scanning, and slice-oriented processing all modify the neighborhood graph presented to the same underlying sequential mechanism. We should compare the resulting interaction paths using neighborhood distortion, coordinate equivariance, task performance, and realized cost, rather than asserting spatial neutrality.
 
-Second, \textbf{linear asymptotic complexity is not the same as universally deployment-efficient}. Lightweight 2D variants show large savings. But volumetric pipelines can have large constants from multiple directional scans, multiple planes, multi-scale branches, or heavy convolutional backbones. Thus, computational claims must be interpreted with dimensionality, input size, scan multiplicity, hardware implementation, etc., rather than just the $\mathcal{O}(N)$ label.
+Second, \textbf{linear asymptotic complexity does not imply universal deployment efficiency}. Lightweight 2D variants show large savings. But volumetric pipelines can have large constants from multiple directional scans, multiple planes, multi-scale branches, or heavy convolutional backbones. Thus, computational claims must be interpreted with dimensionality, input size, scan multiplicity, hardware implementation, etc., rather than just the $\mathcal{O}(N)$ label.
 
 Third, \textbf{the 2D--3D representation problem remains open within the sampled literature}. Volumetric interaction paths are represented explicitly through plane-wise and directional decompositions, but preservation of task-relevant topology, orientation behavior, and neighborhood information requires targeted measurement. This motivates, rather than empirically validates, the proposed research direction on native 3D SSM design: spatial propagation that respects volumetric structure while retaining the computational advantages of state-space processing.
 
-The difference to foundation models is conceptual rather than chronological. Mamba changes \emph{how} context is propagated, whereas SAM changes \emph{where segmentation knowledge comes from and how predictions are conditioned}.
+The distinction from foundation models is conceptual rather than chronological. Mamba changes \emph{how} context is propagated, whereas SAM changes \emph{where segmentation knowledge comes from and how predictions are conditioned}.
 
 
 \section{SAM-Based Medical Segmentation: From Promptable Transfer to Clinical Adaptation}
@@ -1132,13 +1135,13 @@ The shift from CNNs to Transformers and SSMs primarily changes the mechanism of 
 \end{equation}
 where $X$ is the medical image, $P$ is a spatial, semantic, textual, or propagated prompt, and $\hat{Y}$ is the predicted mask. Thus, the medical adaptation problem has two coupled sources of uncertainty. Is the pretrained image representation aligned with the clinical domain? Is the conditioning signal informative enough?
 
-Instead of listing a long list of models, we organize the literature around five adaptation questions. How can we align a natural-image foundation model with medical data? How can we specialize it without full retraining? How can we introduce volumetric continuity? How can we reduce the reliance on manual prompts? How can we extend prompt conditioning to temporal memory or clinical semantics? These questions map directly to the architectural variants shown in Fig.~\ref{fig:sam_medical_architecture_progression} and compared in Table~\ref{tab:detailed_comparison}.
+Rather than listing models, we organize the literature around five adaptation questions. How can we align a natural-image foundation model with medical data? How can we specialize it without full retraining? How can we introduce volumetric continuity? How can we reduce the reliance on manual prompts? How can we extend prompt conditioning to temporal memory or clinical semantics? These questions map directly to the architectural variants shown in Fig.~\ref{fig:sam_medical_architecture_progression} and compared in Table~\ref{tab:detailed_comparison}.
 
 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.8\textwidth]{assets/sam_adaptation_mechanisms.pdf}
-\caption{Four adaptation mechanisms for promptable medical segmentation. (a) SAM baseline. Mask decoder combines image and prompt embeddings. Zero-shot use shown (no fine-tuning for medical domain)~\citep{kirillov2023sam}. (b) Medical supervision can update selected pretrained weights or parameter-efficient modules. E.g., MedSAM, SAMed, Med-SA. Branches indicate alternative strategies rather than a single joint architecture~\citep{ma2024medsam,zhang2023samed,wu2025medsa}. (c) Volumetric image/mask processing in SAM-Med3D, SegVol. Supported prompt types and inference stages are method-specific~\citep{wang2025sam,du2024segvol}. (d) Two different mechanisms to reduce repeated interaction. MedLSAM localizes anatomy to generate prompts~\citep{lei2025medlsam}. Medical SAM 2 uses stored context between sequential inference steps~\citep{zhu2024medical}. Memory feedback indicates use in the next step. These are original schematics showing adaptation choices. Not identical layers or a ranking of segmentation accuracy.}
+\caption{Four adaptation mechanisms for promptable medical segmentation. (a) SAM baseline. Mask decoder combines image and prompt embeddings. Zero-shot use shown (no fine-tuning for medical domain)~\citep{kirillov2023sam}. (b) Medical supervision can update selected pretrained weights or parameter-efficient modules. E.g., MedSAM, SAMed, Med-SA. Branches indicate alternative strategies rather than a single joint architecture~\citep{ma2024medsam,zhang2023samed,wu2025medsa}. (c) Volumetric image/mask processing in SAM-Med3D, SegVol. Supported prompt types and inference stages are method-specific~\citep{wang2025sam,du2024segvol}. (d) Two different mechanisms to reduce repeated interaction. MedLSAM localizes anatomy to generate prompts~\citep{lei2025medlsam}. Medical SAM 2 uses stored context between sequential inference steps~\citep{zhu2024medical}. Memory feedback indicates use in the next step. These are original schematics showing adaptation choices. Not identical layers or a ranking of segmentation accuracy. Drawing code and layout were prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 \label{fig:sam_medical_architecture_progression}
 \end{figure*}
 
@@ -1170,7 +1173,7 @@ Figure~\ref{fig:original_sam_panels} supplements the summary of mechanisms with 
 \hfill
 \OriginalSAMPanel{figures/SegVolFdrawio.png}{(f) SegVol}{0.220\textheight}
 \par\vspace{1.0mm}
-\caption{Detailed promptable segmentation architectures. Complementary to Fig.~\ref{fig:sam_medical_architecture_progression}. (a) SAM-Med3D~\citep{wang2025sam}. (b) MedSAM~\citep{ma2024medsam}. (c) SAMed~\citep{zhang2023samed}. (d) Medical SAM 2~\citep{zhu2024medical}. (e) Med-SA~\citep{wu2025medsa}. (f) SegVol~\citep{du2024segvol}. Volumetric prompting, medical fine-tuning, low-rank adaptation, sequential memory, adapter-based specialization, and interactive volumetric segmentation. Trainable modules, supported prompt types, and inference protocols vary across methods. Numerical results are separately listed in Table~\ref{tab:detailed_comparison}.}
+\caption{Detailed promptable segmentation architectures complementing Figure~\ref{fig:sam_medical_architecture_progression}. (a) SAM-Med3D~\citep{wang2025sam}. (b) MedSAM~\citep{ma2024medsam}. (c) SAMed~\citep{zhang2023samed}. (d) Medical SAM 2~\citep{zhu2024medical}. (e) Med-SA~\citep{wu2025medsa}. (f) SegVol~\citep{du2024segvol}. The panels illustrate volumetric prompting, medical fine-tuning, low-rank adaptation, sequential memory, adapter-based specialization, and interactive volumetric segmentation. Trainable modules, supported prompt types, and inference protocols vary across methods. Numerical results are separately listed in Table~\ref{tab:detailed_comparison}. Panel (d) was revised using vector drawing code prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 \label{fig:original_sam_panels}
 \end{figure*}
 % END AUTHOR FIGURE fig:original_sam_panels
@@ -1324,7 +1327,7 @@ SegVol \citep{du2024segvol}
 
 SAM-Med3D-MoE \citep{wang2024sam}
 & SPPIN 2023 neuroblastoma
-& General and task-specific expert routing
+& Bounding-box prompt
 & DSC
 & 48.9\%
 & MoE-3D
@@ -1542,8 +1545,7 @@ and prespecified comparison
 (Table~\ref{tab:research_roadmap}).
 Objective abbreviations follow
 Table~\ref{tab:construct_definitions}.
-No new experiments are reported.
-}
+No new experiments are reported. Drawing code and layout were prepared with assistance from ChatGPT (OpenAI; historical model version not recorded).}
 
 \label{fig:cross_paradigm_summary}
 \end{figure*}
@@ -2074,13 +2076,13 @@ The LP and GC constructs also require more validation than a metric table suppli
 
 \section{Conclusion}
 
-Architectural progress in medical image segmentation is best assessed through the intervention, task, and operating conditions that produced a reported result. Convolution, attention, selective state propagation, pretrained prompting, and conditional fusion offer different ways to construct and exchange representations; the architecture family name alone does not establish suitability for a particular clinical task.
+Architectural progress in medical image segmentation is best assessed through the intervention, task, and operating conditions that produced a reported result. Convolution, attention, selective state propagation, pretrained prompting, and conditional fusion offer different ways to construct and exchange representations; the architectural family name alone does not establish suitability for a particular clinical task.
 
 This review evaluates these mechanisms in relation to local precision, global context, computational efficiency, and cross-domain generalization. The bounded redistribution framework links each intended benefit to a separately testable constraint. A demonstrable benefit accompanied by non-inferiority on every prespecified protected outcome does not support the proposed harmful constraint shift within that scope. The three worked contrasts illustrate why mechanism attribution requires more than a benchmark improvement or an unmatched cost comparison.
 
 Three reporting practices follow from the evidence audit. First, distinguish the architectural origin from the experiment that generated each reported number, and retain unresolved protocol fields. Second, report overlap and boundary outcomes with patient-level uncertainty while using dedicated tests for topology and long-range reasoning. Third, measure deployment costs under fixed accounting conditions and reserve external domains for evaluation after model selection.
 
-The resulting research agenda includes volumetric propagation, medical pretraining, uncertainty conditioned fusion, spectral reconstruction, and multi-objective selection. These are alternatives to compare against strong baselines, not mandatory components of a larger model. Progress is demonstrated by reproducible, practically meaningful gains under declared constraints.
+The resulting research agenda includes volumetric propagation, medical pretraining, uncertainty-conditioned fusion, spectral reconstruction, and multi-objective selection. These are alternatives to compare against strong baselines, not mandatory components of a larger model. Progress is demonstrated by reproducible, practically meaningful gains under declared constraints.
 
 \section*{Declaration of competing interest}
 The authors state that there are no known competing financial interests or personal relationships that may appear to have influenced the work presented in this paper.
@@ -2089,13 +2091,10 @@ The authors state that there are no known competing financial interests or perso
  \textbf{Nand Kumar Yadav:} Conceptualization, Methodology, Investigation, Writing -- original draft. \textbf{Smriti Regmi:} Investigation, Data curation. \textbf{Moinak Bose:} Investigation, Visualization. \textbf{N. Reed Alexander:} Writing -- review \& editing. \textbf{Debesh Jha:} Supervision, Writing -- review \& editing. \textbf{William CW Chen:} Supervision, Writing -- review \& editing.
 
 \section*{Data availability}
-No patient-level data or new experimental measurements were generated. Supplementary Data S1 (\path{method_register.csv}) contains the method inventory and family assignments; Supplementary Data S2 (\path{numerical_verification.csv}) contains the numerical source-verification records and unresolved fields. These files, the cell-level revision audit, and the explanatory supplementary document are included in the accompanying source package and maintained at \url{https://github.com/nandkyadavusa/Medical-Image-Segmentation-Survey/tree/main/supplementary}. The repository remains access-controlled; a public archive and persistent archival DOI have not yet been established. Published datasets and implementations are identified through their cited sources.
+No patient-level data or new experimental measurements were generated. Supplementary Data S1 (\path{method_register.csv}) provides the method inventory and family assignments. Supplementary Data S2 (\path{numerical_verification.csv}) provides the source-verification records, inspected configurations, and unresolved fields. Both files accompany this manuscript, together with the cell-level revision audit, the contextual-publication index, and the explanatory Supplementary Information. Published datasets and implementations are identified through their cited sources.
 
-
- 
-
-\section*{Declaration of generative AI and AI-assisted technologies in the writing process}
-During manuscript preparation, GPT-based tools were used to assist with language editing, literature organization, source-checking records, mathematical exposition, and schematic figure preparation. The authors retain full responsibility for source verification, interpretation, originality, and the final submitted content.
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+During manuscript preparation, ChatGPT (OpenAI) assisted with language editing, literature organization, drafting of source-verification records, mathematical exposition, and schematic drawing code and layout. GPT-6 Astra Pro was used for the final revision; the historical model versions used for earlier figure preparation were not recorded in the project files. Assistance with individual figures is identified in their captions. The authors retain full responsibility for source verification, interpretation, originality, and approval of the final submitted content.
 \section*{Acknowledgements}
 This work received partial support from the National Science Foundation (Grant No. \href{https://www.nsf.gov/awardsearch/showAward?AWD_ID=2346643}{2346643}), the U.S. Department of Defense (Award No. \href{https://dtic.dimensions.ai/details/grant/grant.14525543}{FA9550-23-1-0495}), and the U.S. Department of Education (Grant No. P116Z240151). Any opinions, interpretations, conclusions, or recommendations expressed herein are those of the authors and should not be construed as representing the official views of the funding agencies.
 

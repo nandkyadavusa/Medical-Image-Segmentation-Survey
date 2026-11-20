@@ -35,6 +35,8 @@ The 23 verified CVPR/MICCAI 2026 contextual papers are now integrated into the r
 
 The [revised supplementary records](supplementary/) account for all 72 previously withheld numerical table entries: 26 recovered numerical entries, 33 inspected-source nonreports (NR), 12 unresolved values (NV), and one unsupported dataset outcome removed. S1 retains its membership and updates verification notes; S2 retains all 68 record identifiers. NR is not a recovered measurement. The existing repository remains private; a separate public archival deposit is pending.
 
+The final correction pass clarifies SAM-Med3D-MoE's bounding-box prompting and its S2 provenance, makes the MIST source discrepancy explicit, corrects CBAM-U-Net author initials in the bibliography, and adds figure-specific AI-assistance disclosures. Eighteen local language edits preserve the equations, citations, and quantitative results. The refreshed PDF uses the official Elsevier article class; the accompanying S1/S2 files are the manuscript's primary evidence-access route. The [follow-up patch](manuscript_updates/2026-11-20/Final_Submission_Corrections.patch) records these limited changes.
+
 ### November 2026: 11 additional curated papers
 
 Eleven more official CVPR/MICCAI 2026 papers have been added across volumetric Mamba, DINOv3 segmentation, foundation-model transfer, weak supervision, distillation, and clinical reasoning. These records were first added as a **repository reading-list extension** and are now discussed in the separately labeled November manuscript update. They are excluded from the frozen 95-method inventory and the S2 numerical audit.
