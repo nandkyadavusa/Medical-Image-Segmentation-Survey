@@ -29,6 +29,13 @@ We argue that segmentation architectures operate under **four competing objectiv
 
 **We welcome contributions!** Feel free to open a pull request when new relevant work is published.
 
+### November 2026: 11 additional curated papers
+
+Eleven more official CVPR/MICCAI 2026 papers have been added across volumetric Mamba, DINOv3 segmentation, foundation-model transfer, weak supervision, distillation, and clinical reasoning. These are a **repository reading-list extension**, not additions to the frozen 95-method manuscript inventory or the S2 numerical audit.
+
+- [Annotated November 2026 additions](NEW_ADDITIONS_NOV2026.md)
+- [Machine-readable November 2026 paper index](new_additions_nov2026.csv)
+
 ### Newly verified papers (2026)
 
 **Twelve additional CVPR/MICCAI 2026 papers are now listed inline in the architecture categories below**, using the standard [Paper]/[Code] format. Details and proposed validation questions are available in the [curated 2026 paper additions](ADDITIONAL_PAPERS_2026.md) and [CSV index](additional_papers_2026.csv). Nine MICCAI 2026 additions postdate the manuscript's 30 June 2026 coverage cutoff. These README additions do **not** alter the frozen 95-method inventory or its supplementary evidence files.
