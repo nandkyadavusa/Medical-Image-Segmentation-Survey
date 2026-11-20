@@ -2,6 +2,8 @@
 
 These files accompany the manuscript **A Taxonomy of Architectural Transitions in Medical Image Segmentation: A Framework for Bottleneck Redistribution**.
 
+**Repository link:** [https://github.com/nandkyadavusa/Medical-Image-Segmentation-Survey/tree/main/supplementary](https://github.com/nandkyadavusa/Medical-Image-Segmentation-Survey/tree/main/supplementary) (private at the time of preparation; reviewer access or a public release is required).
+
 | File | Description |
 | --- | --- |
 | `Supplementary_Information.pdf` | Explanatory supplement describing the inventory, counting rules, numerical provenance, and limitations. |

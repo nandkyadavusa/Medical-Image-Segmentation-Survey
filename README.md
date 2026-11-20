@@ -9,6 +9,15 @@
   <img src="image.png" width="90%" />
 </p>
 
+
+### Manuscript and evidence repository
+
+**Current manuscript:** *A Taxonomy of Architectural Transitions in Medical Image Segmentation: A Framework for Bottleneck Redistribution* (working manuscript; no DOI assigned yet).
+
+**Supplementary material:** [Supplementary Information (PDF)](supplementary/Supplementary_Information.pdf) · [Method inventory (S1)](supplementary/method_register.csv) · [Numerical verification (S2)](supplementary/numerical_verification.csv).
+
+**Evidence repository:** [https://github.com/nandkyadavusa/Medical-Image-Segmentation-Survey/tree/main/supplementary](https://github.com/nandkyadavusa/Medical-Image-Segmentation-Survey/tree/main/supplementary) (currently private; public archival release pending).
+
 This repository provides a **curated, structured collection** of 100+ methods in medical image segmentation, organized by architectural paradigm. It accompanies our survey paper:
 
 > **A Multi-Objective Perspective on Architectures and Design in Medical Image Segmentation**  
